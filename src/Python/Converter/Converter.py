@@ -50,7 +50,7 @@ UINT_UPPER_LIMIT      = 65535
 UDINT_UPPER_LIMIT     = 4294967295
 DATA_TYPE_LOWER_LIMIT = 0
 
-def convert_num_to_multiple_bytes(in_num, type_id):
+def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
     """
     Description:
         Function for for converting uint/udint (16-bit -> 2-byte / 32-bit -> 4-byte) to multiple bytes.
@@ -83,7 +83,7 @@ def convert_num_to_multiple_bytes(in_num, type_id):
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
 
-def convert_multiple_bytes_to_num(in_byte_arr):
+def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
     """
     Description:
         Function for converting multiple bytes to an uint/udint (16-bit -> 2-byte / 32-bit -> 4-byte).
@@ -112,7 +112,7 @@ def convert_multiple_bytes_to_num(in_byte_arr):
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
 
-def convert_byte_to_multiple_bits(in_byte):
+def Convert_BYTE_To_Multiple_BITS(in_byte):
     """
     Description:
         Function for for converting byte to multiple bits.
@@ -146,7 +146,7 @@ def convert_byte_to_multiple_bits(in_byte):
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
 
-def convert_multiple_bits_to_byte(in_bit):
+def Convert_Multiple_BITS_To_BYTE(in_bit):
     """
     Description:
         Function for converting multiple bits to byte.
@@ -187,10 +187,10 @@ def main():
     # Converting uint (16-bit -> 2-byte) to multiple bytes.
     input_var = 12345
     input_tId = 2
-    res_tId_2 = convert_num_to_multiple_bytes(input_var, input_tId)
+    res_tId_2 = Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
 
     # Check result: Converting multiple bytes to an uint (16-bit -> 2-byte).
-    check_res_tId_2 = convert_multiple_bytes_to_num(res_tId_2)
+    check_res_tId_2 = Convert_Multiple_BYTES_To_NUM(res_tId_2)
 
     # Compare results
     print('[INFO] Test No. 1: UINT <-> BYTE[]')
@@ -203,10 +203,10 @@ def main():
     # Converting udint (32-bit -> 4-byte) to multiple bytes.
     input_var = 12345678
     input_tId = 4
-    res_tId_4 = convert_num_to_multiple_bytes(input_var, input_tId)
+    res_tId_4 = Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
 
     # Check result: Converting multiple bytes to an udint (32-bit -> 4-byte).
-    check_res_tId_4 = convert_multiple_bytes_to_num(res_tId_4)
+    check_res_tId_4 = Convert_Multiple_BYTES_To_NUM(res_tId_4)
 
     # Compare results
     print('[INFO] Test No. 2: UDINT <-> BYTE[]')
@@ -218,10 +218,10 @@ def main():
     # 3\ Test No. 3:  BYTE <-> BIT[]
     # Converting byte to multiple bits.
     input_byte = 123
-    res_bit_arr = convert_byte_to_multiple_bits(input_byte)
+    res_bit_arr = Convert_BYTE_To_Multiple_BITS(input_byte)
 
     # Check result: Converting multiple bits to byte.
-    check_res = convert_multiple_bits_to_byte(res_bit_arr)
+    check_res = Convert_Multiple_BITS_To_BYTE(res_bit_arr)
 
     # Compare results
     print('[INFO] Test No. 3: BYTE <-> BIT[]')
@@ -232,5 +232,3 @@ def main():
 
 if __name__ == '__main__':
     sys.exit(main())
-
-
