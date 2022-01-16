@@ -33,7 +33,7 @@ MODULE Module1
         ! TODO
     ENDPROC
 
-    FUNC num sign(num value)
+    FUNC num Sign(num value)
         ! Description:                                                                !
         !   A simple mathematical function that extracts a sign from a digital value. !
         !                                                                             !
@@ -49,7 +49,7 @@ MODULE Module1
         ENDIF
     ENDFUNC
     
-    FUNC num RadToDeg(num value)
+    FUNC num Rad_To_Deg(num value)
         ! Description:                                       !
         !   Conversion function between radians and degrees. !
         !                                                    !
@@ -61,7 +61,7 @@ MODULE Module1
         RETURN ((value) * 180.0 / M_PI);
     ENDFUNC
 
-    FUNC num DegToRad(num value)
+    FUNC num Deg_To_Rad(num value)
         ! Description:                                       !
         !   Conversion function between degrees and radians. !
         !                                                    !
