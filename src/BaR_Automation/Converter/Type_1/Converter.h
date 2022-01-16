@@ -31,7 +31,7 @@
 /** < Include B&R Automation libraries (declarations for B&R ANSI C extensions) */
 #include <bur/plctypes.h>
 
-typedef struct convert_multiple_bytes_to_uint
+typedef struct Convert_Multiple_BYTES_To_UINT
 {
 	/**
 	Description:
@@ -39,19 +39,19 @@ typedef struct convert_multiple_bytes_to_uint
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bytes_to_uint
+ 	 * FUNCTION BLOCK: Convert_Multiple_BYTES_To_UINT
 	 * INPUT VARIABLES
  	 */
 	unsigned char IN_BYTE[2];
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bytes_to_uint
+ 	 * FUNCTION BLOCK: Convert_Multiple_BYTES_To_UINT
 	 * OUTPUT VARIABLES
  	 */
 	UINT OUT_UINT;
-} convert_multiple_bytes_to_uint_typ;
+} Convert_Multiple_BYTES_To_UINT_typ;
 
-typedef struct convert_multiple_bytes_to_udint
+typedef struct Convert_Multiple_BYTES_To_UDINT
 {
 	/**
 	Description:
@@ -59,19 +59,19 @@ typedef struct convert_multiple_bytes_to_udint
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bytes_to_udint
+ 	 * FUNCTION BLOCK: Convert_Multiple_BYTES_To_UDINT
 	 * INPUT VARIABLES
  	 */
 	unsigned char IN_BYTE[4];
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bytes_to_udint
+ 	 * FUNCTION BLOCK: Convert_Multiple_BYTES_To_UDINT
 	 * OUTPUT VARIABLES
  	 */
 	UDINT OUT_UDINT;
-} convert_multiple_bytes_to_udint_typ;
+} Convert_Multiple_BYTES_To_UDINT_typ;
 
-typedef struct convert_uint_to_multiple_bytes
+typedef struct Convert_UINT_To_Multiple_BYTES
 {
 	/**
 	Description:
@@ -79,19 +79,19 @@ typedef struct convert_uint_to_multiple_bytes
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_uint_to_multiple_bytes
+ 	 * FUNCTION BLOCK: Convert_UINT_To_Multiple_BYTES
 	 * INPUT VARIABLES
  	 */
 	UINT IN_UINT;
 	
 	/**
- 	 * FUNCTION BLOCK: convert_uint_to_multiple_bytes
+ 	 * FUNCTION BLOCK: Convert_UINT_To_Multiple_BYTES
 	 * OUTPUT VARIABLES
  	 */
 	unsigned char OUT_BYTE[2];
-} convert_uint_to_multiple_decimal_typ;
+} Convert_UINT_To_Multiple_BYTES_typ;
 
-typedef struct convert_udint_to_multiple_bytes
+typedef struct Convert_UDINT_To_Multiple_BYTES
 {
 	/**
 	Description:
@@ -99,19 +99,19 @@ typedef struct convert_udint_to_multiple_bytes
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_udint_to_multiple_bytes
+ 	 * FUNCTION BLOCK: Convert_UDINT_To_Multiple_BYTES
 	 * INPUT VARIABLES
  	 */
 	UDINT IN_UDINT;
 	
 	/**
- 	 * FUNCTION BLOCK: convert_udint_to_multiple_bytes
+ 	 * FUNCTION BLOCK: Convert_UDINT_To_Multiple_BYTES
 	 * OUTPUT VARIABLES
  	 */
 	unsigned char OUT_BYTE[4];
-} convert_udint_to_multiple_decimal_typ;
+} Convert_UDINT_To_Multiple_BYTES_typ;
 
-typedef struct convert_multiple_bits_to_byte
+typedef struct Convert_Multiple_BITS_To_Byte
 {
 	/**
 	Description:
@@ -119,19 +119,19 @@ typedef struct convert_multiple_bits_to_byte
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bits_to_byte
+ 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_Byte
 	 * INPUT VARIABLES
  	 */
 	BOOL IN_BIT[8];
 	
 	/**
- 	 * FUNCTION BLOCK: convert_multiple_bits_to_byte
+ 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_Byte
 	 * OUTPUT VARIABLES
  	 */
 	unsigned char OUT_BYTE;
-} convert_multiple_bits_to_typ;
+} Convert_Multiple_BITS_To_Byte_typ;
 
-typedef struct convert_byte_to_multiple_bits
+typedef struct Convert_BYTE_To_Multiple_BITS
 {
 	/**
 	Description:
@@ -139,29 +139,29 @@ typedef struct convert_byte_to_multiple_bits
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: convert_byte_to_multiple_bits
+ 	 * FUNCTION BLOCK: Convert_BYTE_To_Multiple_BITS
 	 * INPUT VARIABLES
  	 */
 	unsigned char IN_BYTE;
 	
 	/**
- 	 * FUNCTION BLOCK: convert_byte_to_multiple_bits
+ 	 * FUNCTION BLOCK: Convert_BYTE_To_Multiple_BITS
 	 * OUTPUT VARIABLES
  	 */
 	BOOL OUT_BIT[8];
-} convert_byte_to_multiple_bits_typ;
+} Convert_BYTE_To_Multiple_BITS_typ;
 
 /**
  * Declaration of function blocks for conversion between different types.
  */
-_BUR_PUBLIC void convert_multiple_bytes_to_uint(struct convert_multiple_bytes_to_uint* inst);
-_BUR_PUBLIC void convert_multiple_bytes_to_udint(struct convert_multiple_bytes_to_udint* inst);
-_BUR_PUBLIC void convert_uint_to_multiple_bytes(struct convert_uint_to_multiple_bytes* inst);
-_BUR_PUBLIC void convert_udint_to_multiple_bytes(struct convert_udint_to_multiple_bytes* inst);
-_BUR_PUBLIC void convert_multiple_bits_to_byte(struct convert_multiple_bits_to_byte* inst);
-_BUR_PUBLIC void convert_byte_to_multiple_bits(struct convert_byte_to_multiple_bits* inst);
+_BUR_PUBLIC void Convert_Multiple_BYTES_To_UINT(struct Convert_Multiple_BYTES_To_UINT* inst);
+_BUR_PUBLIC void Convert_Multiple_BYTES_To_UDINT(struct Convert_Multiple_BYTES_To_UDINT* inst);
+_BUR_PUBLIC void Convert_UINT_To_Multiple_BYTES(struct Convert_UINT_To_Multiple_BYTES* inst);
+_BUR_PUBLIC void Convert_UDINT_To_Multiple_BYTES(struct Convert_UDINT_To_Multiple_BYTES* inst);
+_BUR_PUBLIC void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst);
+_BUR_PUBLIC void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst);
 
-void convert_multiple_bytes_to_uint(struct convert_multiple_bytes_to_uint* inst){
+void Convert_Multiple_BYTES_To_UINT(struct Convert_Multiple_BYTES_To_UINT* inst){
 	/**
 	Description:
 		Function block (FB) for converting multiple bytes to an integer.
@@ -177,7 +177,7 @@ void convert_multiple_bytes_to_uint(struct convert_multiple_bytes_to_uint* inst)
 		 inst->IN_BYTE[0] = possible values range from 0 to 255
 		 inst->IN_BYTE[1] = possible values range from 0 to 255
 		 // Call Function Block
-		 convert_multiple_bytes_to_uint(&inst);
+		 Convert_Multiple_BYTES_To_UINT(&inst);
 		 // Write outputs
 		 inst->OUT_UINT = Result calculation from inst->IN_BYTE[0 .. 1] {possible values range from 0 to 65535}
 	*/
@@ -185,7 +185,7 @@ void convert_multiple_bytes_to_uint(struct convert_multiple_bytes_to_uint* inst)
 	memcpy(&inst->OUT_UINT, inst->IN_BYTE, sizeof inst->OUT_UINT);
 }
 
-void convert_multiple_bytes_to_udint(struct convert_multiple_bytes_to_udint* inst){
+void Convert_Multiple_BYTES_To_UDINT(struct Convert_Multiple_BYTES_To_UDINT* inst){
 	/**
 	Description:
 		Function block (FB) for converting multiple bytes to an udint (unsigned int 32-bit).
@@ -202,7 +202,7 @@ void convert_multiple_bytes_to_udint(struct convert_multiple_bytes_to_udint* ins
 		 ...
 		 inst->IN_BYTE[3] = possible values range from 0 to 255
 		 // Call Function Block
-		 convert_multiple_bytes_to_udint(&inst);
+		 Convert_Multiple_BYTES_To_UDINT(&inst);
 		 // Write outputs
 		 inst->OUT_UDINT = Result calculation from inst->IN_BYTE[0 .. 3] {possible values range from 0 to 4294967295}
 	*/
@@ -210,7 +210,7 @@ void convert_multiple_bytes_to_udint(struct convert_multiple_bytes_to_udint* ins
 	memcpy(&inst->OUT_UDINT, inst->IN_BYTE, sizeof inst->OUT_UDINT);
 }
 
-void convert_uint_to_multiple_bytes(struct convert_uint_to_multiple_bytes* inst){
+void Convert_UINT_To_Multiple_BYTES(struct Convert_UINT_To_Multiple_BYTES* inst){
 	/**
 	Description:
 		Function block (FB) for converting integer to multiple bytes.
@@ -225,7 +225,7 @@ void convert_uint_to_multiple_bytes(struct convert_uint_to_multiple_bytes* inst)
 	     // Read inputs
 		 inst->IN_INT = possible values range from 0 to 65535
 		 // Call Function Block
-		 convert_uint_to_multiple_bytes(&inst);
+		 Convert_UINT_To_Multiple_BYTES(&inst);
 		 // Write outputs
 		 inst->OUT_BYTE[0] = Result calculation from inst->IN_INT {Part 1: 0 .. 255} 
 		 inst->OUT_BYTE[1] = Result calculation from inst->IN_INT {Part 2: 0 .. 255}
@@ -237,7 +237,7 @@ void convert_uint_to_multiple_bytes(struct convert_uint_to_multiple_bytes* inst)
 	}
 }
 
-void convert_udint_to_multiple_bytes(struct convert_udint_to_multiple_bytes* inst){
+void Convert_UDINT_To_Multiple_BYTES(struct Convert_UDINT_To_Multiple_BYTES* inst){
 	/**
 	Description:
 		Function block (FB) for converting udint (unsigned int 32-bit) to multiple bytes.
@@ -252,7 +252,7 @@ void convert_udint_to_multiple_bytes(struct convert_udint_to_multiple_bytes* ins
 	     // Read inputs
 		 inst->IN_UDINT = possible values range from 0 to 4294967295
 		 // Call Function Block
-		 convert_udint_to_multiple_bytes(&inst);
+		 Convert_UDINT_To_Multiple_BYTES(&inst);
 		 // Write outputs
 		 inst->OUT_BYTE[0] = Result calculation from inst->IN_UDINT {Part 1: 0 .. 255}
 		 ...
@@ -265,7 +265,7 @@ void convert_udint_to_multiple_bytes(struct convert_udint_to_multiple_bytes* ins
 	}
 }
 
-void convert_multiple_bits_to_byte(struct convert_multiple_bits_to_byte* inst){
+void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst){
 	/**
 	Description:
 		Function block (FB) for converting multiple bits to byte.
@@ -282,7 +282,7 @@ void convert_multiple_bits_to_byte(struct convert_multiple_bits_to_byte* inst){
 	     ...
 		 inst->IN_BIT[7]  = possible values range from 0 (false) to 1 (true)
 		 // Call Function Block
-		 convert_int_to_multiple_bytes(&inst);
+		 Convert_Multiple_BITS_To_Byte(&inst);
 		 // Write outputs
 		 inst->OUT_BYTE = Result calculation from inst->IN_BIT[0 .. 7] {Part: 0 .. 255}
 	*/
@@ -304,7 +304,7 @@ void convert_multiple_bits_to_byte(struct convert_multiple_bits_to_byte* inst){
 	inst->OUT_BYTE = aux_byte;
 }
 
-void convert_byte_to_multiple_bits(struct convert_byte_to_multiple_bits* inst){
+void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst){
 	/**
 	Description:
 		Function block (FB) for converting byte to multiple bits.
@@ -319,7 +319,7 @@ void convert_byte_to_multiple_bits(struct convert_byte_to_multiple_bits* inst){
 	     // Read inputs
 		 inst->IN_BYTE  = possible values range from 0 to 255
 		 // Call Function Block
-		 convert_int_to_multiple_bytes(&inst);
+		 Convert_BYTE_To_Multiple_BITS(&inst);
 		 // Write outputs
 		 inst->OUT_BIT[0] = Result calculation from inst->IN_BYTE {Part 1: 0 (false) / 1 (true)}
 		 ...
@@ -345,5 +345,3 @@ void convert_byte_to_multiple_bits(struct convert_byte_to_multiple_bits* inst){
 }
 
 #endif
-
-
