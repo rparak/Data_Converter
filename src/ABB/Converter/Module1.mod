@@ -32,8 +32,8 @@ MODULE Module1
     PROC Main()
         ! TODO
     ENDPROC
-    
-    PROC convert_uint_to_multiple_bytes(num IN_UINT, INOUT num OUT_BYTE{*})
+
+    PROC Convert_UINT_To_Multiple_BYTES(num IN_UINT, INOUT num OUT_BYTE{*})
         ! Description:                                                             !
         !   Procedure for converting uint (unsigned int 16-bit) to multiple bytes. !
         !                                                                          !
@@ -45,7 +45,7 @@ MODULE Module1
         !   Read Inputs:                                                           !
         !       IN_UINT := possible values range from 0 to 65535                   !
         !   Call Procedure:                                                        !
-        !       convert_uint_to_multiple_bytes IN_UINT, OUT_BYTE                   !
+        !       Convert_UINT_To_Multiple_BYTES IN_UINT, OUT_BYTE                   !
         !   Write Outputs:                                                         !
         !       OUT_UDINT{1 .. 2} := possible values range from 0 to 255           !
         
@@ -53,7 +53,7 @@ MODULE Module1
         OUT_BYTE{2} := Trunc(IN_UINT/256\Dec:=0) MOD 256;
     ENDPROC
 
-    PROC convert_multiple_bytes_to_uint(num IN_BYTE{*}, INOUT num OUT_UINT)
+    PROC Convert_Multiple_BYTES_To_UINT(num IN_BYTE{*}, INOUT num OUT_UINT)
         ! Description:                                                                !
         !   Procedure for converting multiple bytes to an uint (unsigned int 16-bit). !
         !                                                                             !
@@ -65,14 +65,14 @@ MODULE Module1
         !   Read Inputs:                                                              !
         !       IN_BYTE{1 .. 2} := possible values range from 0 to 255                !
         !   Call Procedure:                                                           !
-        !       convert_multiple_bytes_to_uint IN_BYTE, OUT_UINT                      !
+        !       Convert_Multiple_BYTES_To_UINT IN_BYTE, OUT_UINT                      !
         !   Write Outputs:                                                            !
         !       OUT_UDINT := possible values range from 0 to 65535                    !
  
         OUT_UINT := IN_BYTE{1} + IN_BYTE{2} * Pow(256,1);
     ENDPROC
     
-    PROC convert_udint_to_multiple_bytes(num IN_UDINT, INOUT num OUT_BYTE{*})
+    PROC Convert_UDINT_To_Multiple_BYTES(num IN_UDINT, INOUT num OUT_BYTE{*})
         ! Description:                                                              !
         !   Procedure for converting udint (unsigned int 32-bit) to multiple bytes. !
         !                                                                           !
@@ -84,7 +84,7 @@ MODULE Module1
         !   Read Inputs:                                                            !
         !       IN_UINT := possible values range from 0 to 4294967295               !
         !   Call Procedure:                                                         !
-        !       convert_udint_to_multiple_bytes IN_UDINT, OUT_BYTE                  !
+        !       Convert_UDINT_To_Multiple_BYTES IN_UDINT, OUT_BYTE                  !
         !   Write Outputs:                                                          !
         !       OUT_UDINT{1 .. 4} := possible values range from 0 to 255            !
         
@@ -94,7 +94,7 @@ MODULE Module1
         OUT_BYTE{4} := Trunc(Trunc(Trunc(IN_UDINT/256\Dec:=0)/256\Dec:=0)/256\Dec:=0) MOD 256;
     ENDPROC
     
-    PROC convert_multiple_bytes_to_udint(num IN_BYTE{*}, INOUT num OUT_UDINT)
+    PROC Convert_Multiple_BYTES_To_UDINT(num IN_BYTE{*}, INOUT num OUT_UDINT)
         ! Description:                                                                 !
         !   Procedure for converting multiple bytes to an udint (unsigned int 32-bit). !
         !                                                                              !
@@ -106,14 +106,14 @@ MODULE Module1
         !   Read Inputs:                                                               !
         !       IN_BYTE{1..4} := possible values range from 0 to 255                   !
         !   Call Procedure:                                                            !
-        !       convert_multiple_bytes_to_udint IN_BYTE, OUT_UDINT                     !
+        !       Convert_Multiple_BYTES_To_UDINT IN_BYTE, OUT_UDINT                     !
         !   Write Outputs:                                                             ! 
         !       OUT_UDINT := possible values range from 0 to 4294967295                !
         
         OUT_UDINT := IN_BYTE{1} + IN_BYTE{2} * Pow(256,1) + IN_BYTE{3} * Pow(256,2) + IN_BYTE{4} * Pow(256,3);
     ENDPROC
 
-    PROC convert_multiple_bits_to_byte(num IN_BIT{*}, INOUT num OUT_BYTE)
+    PROC Convert_Multiple_BITS_To_BYTE(num IN_BIT{*}, INOUT num OUT_BYTE)
         ! Description:                                              !
         !   Procedure for converting multiple bits to byte.         !
         !                                                           !
@@ -125,7 +125,7 @@ MODULE Module1
         !   Read Inputs:                                            !
         !       IN_BIT{1 .. 8} := possible values range from 0 to 1 !
         !   Call Procedure:                                         !
-        !       convert_multiple_bits_to_byte IN_BIT, OUT_BYTE      !
+        !       Convert_Multiple_BITS_To_BYTE IN_BIT, OUT_BYTE      !
         !   Write Outputs:                                          !
         !       OUT_BYTE := possible values range from 0 to 255     !
         
@@ -143,7 +143,7 @@ MODULE Module1
         OUT_BYTE := out_var;
     ENDPROC
 
-    PROC convert_byte_to_multiple_bits(num IN_BYTE, INOUT num OUT_BIT{*})
+    PROC Convert_BYTE_To_Multiple_BITS(num IN_BYTE, INOUT num OUT_BIT{*})
         ! Description:                                                !
         !   Procedure for converting byte to multiple bits.           !
         !                                                             !
@@ -155,7 +155,7 @@ MODULE Module1
         !   Read Inputs:                                              !
         !       IN_BYTE := possible values range from 0 to 255        !
         !   Call Procedure:                                           !
-        !       convert_byte_to_multiple_bits IN_BYTE, OUT_BIT        !
+        !       Convert_BYTE_To_Multiple_BITS IN_BYTE, OUT_BIT        !
         !   Write Outputs:                                            !
         !       OUT_BIT{1 .. 8} := possible values range from 0 to 1  !
         
