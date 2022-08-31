@@ -70,8 +70,8 @@ def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
         # Create aux. variable
         aux_var = int(in_num/NUM_OF_VALUES_IN_BYTE)
 
-        out = np.zeros(type_id)
         # Initialize the first index of the output array
+        out    = np.zeros(type_id)
         out[0] = int(in_num) % NUM_OF_VALUES_IN_BYTE
         
         for i in range(1, type_id):
@@ -103,7 +103,6 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
                 assert False
 
         out = 0
-
         for i, value in enumerate(in_byte_arr):
             out += value*(NUM_OF_VALUES_IN_BYTE**i)
             
@@ -133,7 +132,7 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
         # Convert decimal number (BYTE) to multiple Booleans (BITs)
         # Note: 1 BYTE [0 - 255] = 8 BITs [0 - 1]
         out = np.zeros(NUM_OF_BIT_IN_BYTE)
-
+        
         for i in range(NUM_OF_BIT_IN_BYTE):
             if aux_byte > 0:
                 out[i]   = aux_byte % 2
