@@ -53,7 +53,7 @@ DATA_TYPE_LOWER_LIMIT = 0
 def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
     """
     Description:
-        Function for for converting uint/udint (16-bit -> 2-byte / 32-bit -> 4-byte) to multiple bytes.
+        Function for converting uint/udint (16-bit -> 2-byte / 32-bit -> 4-byte) to multiple bytes.
         
     Args:
         (1) in_num [UINT / UDINT]: Input number (2 -> possible values range from 0 to 65535 / 4 BYTEs -> possible values range from 0 to 4294967295).
@@ -65,7 +65,7 @@ def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
  
     try:
         assert type_id == 2 or type_id == 4
-        assert (type_id == 2 and (in_num >= DATA_TYPE_LOWER_LIMIT and in_num <= UINT_UPPER_LIMIT)) or (type_id == 4 and (in_num >= DATA_TYPE_LOWER_LIMIT and in_num <= UDINT_UPPER_LIMIT))
+        assert ((type_id == 2 and (DATA_TYPE_LOWER_LIMIT <= in_num <= UINT_UPPER_LIMIT)) or (type_id == 4 and (DATA_TYPE_LOWER_LIMIT <= in_num <= UDINT_UPPER_LIMIT)))
 
         # Create aux. variable
         aux_var = int(in_num/NUM_OF_VALUES_IN_BYTE)
@@ -96,15 +96,14 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
     """
         
     try: 
-        assert len(in_byte_arr) == 2 or len(in_byte_arr) == 4
-
-        for _, value in enumerate(in_byte_arr):
-            if value > USINT_UPPER_LIMIT or value < DATA_TYPE_LOWER_LIMIT:
-                assert False
+        assert in_byte_arr.size == 2 or in_byte_arr.size == 4
 
         out = 0
-        for i, value in enumerate(in_byte_arr):
-            out += value*(NUM_OF_VALUES_IN_BYTE**i)
+        for i, in_byte_arr_i in enumerate(in_byte_arr):
+            if DATA_TYPE_LOWER_LIMIT > in_byte_arr_i > USINT_UPPER_LIMIT:
+                assert False
+
+            out += in_byte_arr_i*(NUM_OF_VALUES_IN_BYTE**i)
             
         return out
 
@@ -114,7 +113,7 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
 def Convert_BYTE_To_Multiple_BITS(in_byte):
     """
     Description:
-        Function for for converting byte to multiple bits.
+        Conversion of input values (BYTE) into a vector of logical values (BIT).
         
     Args:
         (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
@@ -124,21 +123,18 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
     """
         
     try: 
-        assert in_byte >= DATA_TYPE_LOWER_LIMIT and in_byte <= USINT_UPPER_LIMIT
+        assert DATA_TYPE_LOWER_LIMIT <= in_byte <= USINT_UPPER_LIMIT
 
         # Create aux. variable
         aux_byte = in_byte
         
         # Convert decimal number (BYTE) to multiple Booleans (BITs)
         # Note: 1 BYTE [0 - 255] = 8 BITs [0 - 1]
-        out = np.zeros(NUM_OF_BIT_IN_BYTE)
+        out = np.zeros(NUM_OF_BIT_IN_BYTE, dtype=np.bool_)
         
         for i in range(NUM_OF_BIT_IN_BYTE):
-            if aux_byte > 0:
-                out[i]   = aux_byte % 2
-                aux_byte = int(aux_byte / 2)
-            else:
-                out[i] = 0
+            out[i]   = aux_byte % 2
+            aux_byte = int(aux_byte / 2)
 
         return out
 
@@ -157,19 +153,17 @@ def Convert_Multiple_BITS_To_BYTE(in_bit):
         (1) out [USINT {Byte}]: Output number (BYTE -> possible values range from 0 to 255). 
     """
     try: 
-        assert len(in_bit) == NUM_OF_BIT_IN_BYTE
-
-        for _, value in enumerate(in_bit):
-            if value > BOOL_UPPER_LIMIT or value < DATA_TYPE_LOWER_LIMIT:
-                assert False
+        assert in_bit.size == NUM_OF_BIT_IN_BYTE
 
         # Convert multiple Booleans (BITs) to decimal number (BYTE)
         # Note: 8 BITs [0 - 1] = 1 BYTE [0 - 255]
         out = 0
 
-        for i, value in enumerate(in_bit):
-            if value == BOOL_UPPER_LIMIT:
-                out += 2**i
+        for i, in_bit_i in enumerate(in_bit):
+            if DATA_TYPE_LOWER_LIMIT < in_bit_i < BOOL_UPPER_LIMIT:
+                assert False
+
+            out += 2**i if in_bit_i == BOOL_UPPER_LIMIT else DATA_TYPE_LOWER_LIMIT
 
         return out
 
@@ -216,7 +210,7 @@ def main():
 
     # 3\ Test No. 3:  BYTE <-> BIT[]
     # Converting byte to multiple bits.
-    input_byte = 123
+    input_byte  = 123
     res_bit_arr = Convert_BYTE_To_Multiple_BITS(input_byte)
 
     # Check result: Converting multiple bits to byte.
