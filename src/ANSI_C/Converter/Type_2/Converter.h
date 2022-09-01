@@ -1,6 +1,6 @@
 /**
  * MIT License
- * Copyright(c) 2021 Roman Parak
+ * Copyright(c) 2022 Roman Parak
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -31,11 +31,20 @@
 /** < Include B&R Automation libraries (declarations for B&R ANSI C extensions) */
 #include <bur/plctypes.h>
 
+/**
+Description:
+	 Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+	 byte to an array of bits, and an array of bits to byte.
+	
+	 Note: 
+	     A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+ */
+
 typedef struct Convert_Multiple_BYTES_To_INT
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an integer.
+		Conversion of a vector of values (BYTES) to a value (INT).
 	*/
 	
 	/**
@@ -55,7 +64,7 @@ typedef struct Convert_Multiple_BYTES_To_REAL
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to a real (float).
+		Conversion of a vector of values (BYTES) to a value (REAL - Float).
 	*/
 	
 	/**
@@ -75,7 +84,7 @@ typedef struct Convert_INT_To_Multiple_BYTES
 {
 	/**
 	Description:
-		Function block (FB) for converting integer to multiple bytes.
+		Conversion of input value (INT) into a vector of values (BYTES).
 	*/
 	
 	/**
@@ -95,7 +104,7 @@ typedef struct Convert_REAL_To_Multiple_BYTES
 {
 	/**
 	Description:
-		Function block (FB) for converting real (float) to multiple bytes.
+		Conversion of input value (REAL - Float) into a vector of values (BYTES).
 	*/
 	
 	/**
@@ -111,31 +120,31 @@ typedef struct Convert_REAL_To_Multiple_BYTES
 	unsigned char OUT_BYTE[4];
 } Convert_REAL_To_Multiple_BYTES_typ;
 
-typedef struct Convert_Multiple_BITS_To_BYTE
+typedef struct Convert_Multiple_BITS_To_Byte
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bits to byte.
+		Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
 	*/
 	
 	/**
- 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_BYTE
+ 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_Byte
 	 * INPUT VARIABLES
  	 */
 	BOOL IN_BIT[8];
 	
 	/**
- 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_BYTE
+ 	 * FUNCTION BLOCK: Convert_Multiple_BITS_To_Byte
 	 * OUTPUT VARIABLES
  	 */
 	unsigned char OUT_BYTE;
-} Convert_Multiple_BITS_To_BYTE_typ;
+} Convert_Multiple_BITS_To_Byte_typ;
 
 typedef struct Convert_BYTE_To_Multiple_BITS
 {
 	/**
 	Description:
-		Function block (FB) for converting byte to multiple bits.
+		Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
 	*/
 	
 	/**
@@ -164,7 +173,7 @@ _BUR_PUBLIC void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_B
 void Convert_Multiple_BYTES_To_INT(struct Convert_Multiple_BYTES_To_INT* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an integer.
+		Conversion of a vector of values (BYTES) to a value (INT).
 
 	Args:
 		(1) IN_BYTE[0 .. 1] [BYTE (USINT) ARRAY]: Input multiple bytes.
@@ -188,7 +197,7 @@ void Convert_Multiple_BYTES_To_INT(struct Convert_Multiple_BYTES_To_INT* inst){
 void Convert_Multiple_BYTES_To_REAL(struct Convert_Multiple_BYTES_To_REAL* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to a real (float).
+		Conversion of a vector of values (BYTES) to a value (REAL - Float).
 
 	Args:
 		(1) IN_BYTE[0 .. 3] [BYTE (USINT) ARRAY]: Input multiple bytes.
@@ -213,7 +222,7 @@ void Convert_Multiple_BYTES_To_REAL(struct Convert_Multiple_BYTES_To_REAL* inst)
 void Convert_INT_To_Multiple_BYTES(struct Convert_INT_To_Multiple_BYTES* inst){
 	/**
 	Description:
-		Function block (FB) for converting integer to multiple bytes.
+		Conversion of input value (INT) into a vector of values (BYTES).
 
 	Args:
 		(1) IN_INT [INT]: Input integer (2 BYTEs).
@@ -240,7 +249,7 @@ void Convert_INT_To_Multiple_BYTES(struct Convert_INT_To_Multiple_BYTES* inst){
 void Convert_REAL_To_Multiple_BYTES(struct Convert_REAL_To_Multiple_BYTES* inst){
 	/**
 	Description:
-		Function block (FB) for converting real (float) to multiple bytes.
+		Conversion of input value (REAL - Float) into a vector of values (BYTES).
 
 	Args:
 		(1) IN_REAL [REAL]: Input real (4 BYTEs).
@@ -265,10 +274,13 @@ void Convert_REAL_To_Multiple_BYTES(struct Convert_REAL_To_Multiple_BYTES* inst)
 	}
 }
 
-void Convert_Multiple_BITS_To_BYTE(struct Convert_Multiple_BITS_To_BYTE* inst){
+void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bits to byte.
+		Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
+	
+		Note:
+			1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
 	Args:
 		(1) IN_BIT[0 .. 7] [BIT (BOOL) ARRAY]: Input multiple bits (1 BYTE).
@@ -282,18 +294,13 @@ void Convert_Multiple_BITS_To_BYTE(struct Convert_Multiple_BITS_To_BYTE* inst){
 	     ...
 		 inst->IN_BIT[7]  = possible values range from 0 (false) to 1 (true)
 		 // Call Function Block
-		 Convert_Multiple_BITS_To_BYTE(&inst);
+		 Convert_Multiple_BITS_To_Byte(&inst);
 		 // Write outputs
 		 inst->OUT_BYTE = Result calculation from inst->IN_BIT[0 .. 7] {Part: 0 .. 255}
 	*/
 	
-	/// Create aux. variable
 	unsigned char aux_byte = 0;
-	
-	/**
-	  Convert multiple Booleans (BITs) to decimal number (BYTE)
-	  Note: 8 BITs [0 - 1] = 1 BYTE [0 - 255]
-	 */
+
 	unsigned char i;
 	for(i = 0; i < (unsigned char)(sizeof(inst->IN_BIT)/sizeof(inst->IN_BIT[0])); i++){
 		if(inst->IN_BIT[i] == 1){
@@ -307,7 +314,10 @@ void Convert_Multiple_BITS_To_BYTE(struct Convert_Multiple_BITS_To_BYTE* inst){
 void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst){
 	/**
 	Description:
-		Function block (FB) for converting byte to multiple bits.
+		Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
+	
+		Note:
+			8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
 	Args:
 		(1) IN_BYTE [BYTE]: Input byte.
@@ -326,21 +336,12 @@ void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst){
 		 inst->OUT_BIT[7] = Result calculation from inst->IN_BYTE {Part 1: 0 (false) / 1 (true)}
 	*/
 	
-	/// Create aux. variable
 	unsigned char aux_byte = inst->IN_BYTE;
 	
-	/**
-	  Convert decimal number (BYTE) to multiple Booleans (BITs)
-	  Note: 1 BYTE [0 - 255] = 8 BITs [0 - 1]
-	 */
 	unsigned char i;
 	for(i = 0; i < (unsigned char)(sizeof(inst->OUT_BIT)/sizeof(inst->OUT_BIT[0])); i++){
-		if(aux_byte > 0){
-			inst->OUT_BIT[i] = aux_byte % 2;
-			aux_byte = aux_byte/2;
-		}else{
-			inst->OUT_BIT[i] = 0;
-		}
+		inst->OUT_BIT[i] = aux_byte % 2;
+		aux_byte = aux_byte/2;
 	}
 }
 

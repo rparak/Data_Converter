@@ -1,6 +1,6 @@
 /**
  * MIT License
- * Copyright(c) 2021 Roman Parak
+ * Copyright(c) 2022 Roman Parak
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -31,11 +31,20 @@
 /** < Include B&R Automation libraries (declarations for B&R ANSI C extensions) */
 #include <bur/plctypes.h>
 
+/**
+Description:
+	 Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+	 byte to an array of bits, and an array of bits to byte.
+	
+	 Note: 
+	     A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+ */
+
 typedef struct Convert_Multiple_BYTES_To_UINT
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an uint (unsigned int 16-bit).
+		Conversion of a vector of values (BYTES) to a value (UINT - 16-bit).
 	*/
 	
 	/**
@@ -55,7 +64,7 @@ typedef struct Convert_Multiple_BYTES_To_UDINT
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an udint (unsigned int 32-bit).
+		Conversion of a vector of values (BYTES) to a value (UDINT - 32-bit).
 	*/
 	
 	/**
@@ -75,7 +84,7 @@ typedef struct Convert_UINT_To_Multiple_BYTES
 {
 	/**
 	Description:
-		Function block (FB) for converting uint (unsigned int 16-bit) to multiple bytes.
+		Conversion of input value (UINT - 16-bit) into a vector of values (BYTES).
 	*/
 	
 	/**
@@ -95,7 +104,7 @@ typedef struct Convert_UDINT_To_Multiple_BYTES
 {
 	/**
 	Description:
-		Function block (FB) for converting udint (unsigned int 32-bit) to multiple bytes.
+		Conversion of input value (UDINT - 32-bit) into a vector of values (BYTES).
 	*/
 	
 	/**
@@ -115,7 +124,7 @@ typedef struct Convert_Multiple_BITS_To_Byte
 {
 	/**
 	Description:
-		Function block (FB) for converting multiple bits to byte.
+		Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
 	*/
 	
 	/**
@@ -135,7 +144,7 @@ typedef struct Convert_BYTE_To_Multiple_BITS
 {
 	/**
 	Description:
-		Function block (FB) for converting byte to multiple bits.
+		Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
 	*/
 	
 	/**
@@ -164,7 +173,7 @@ _BUR_PUBLIC void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_B
 void Convert_Multiple_BYTES_To_UINT(struct Convert_Multiple_BYTES_To_UINT* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an integer.
+		Conversion of a vector of values (BYTES) to a value (UINT - 16-bit).
 
 	Args:
 		(1) IN_BYTE[0 .. 1] [BYTE (USINT) ARRAY]: Input multiple bytes.
@@ -182,13 +191,13 @@ void Convert_Multiple_BYTES_To_UINT(struct Convert_Multiple_BYTES_To_UINT* inst)
 		 inst->OUT_UINT = Result calculation from inst->IN_BYTE[0 .. 1] {possible values range from 0 to 65535}
 	*/
 	
-	memcpy(&inst->OUT_UINT, inst->IN_BYTE, sizeof inst->OUT_UINT);
+	memcpy(&inst->OUT_UINT, inst->IN_BYTE, sizeof(inst->OUT_UINT));
 }
 
 void Convert_Multiple_BYTES_To_UDINT(struct Convert_Multiple_BYTES_To_UDINT* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bytes to an udint (unsigned int 32-bit).
+		Conversion of a vector of values (BYTES) to a value (UDINT - 32-bit).
 
 	Args:
 		(1) IN_BYTE[0 .. 3] [BYTE (USINT) ARRAY]: Input multiple bytes.
@@ -207,13 +216,13 @@ void Convert_Multiple_BYTES_To_UDINT(struct Convert_Multiple_BYTES_To_UDINT* ins
 		 inst->OUT_UDINT = Result calculation from inst->IN_BYTE[0 .. 3] {possible values range from 0 to 4294967295}
 	*/
 	
-	memcpy(&inst->OUT_UDINT, inst->IN_BYTE, sizeof inst->OUT_UDINT);
+	memcpy(&inst->OUT_UDINT, inst->IN_BYTE, sizeof(inst->OUT_UDINT));
 }
 
 void Convert_UINT_To_Multiple_BYTES(struct Convert_UINT_To_Multiple_BYTES* inst){
 	/**
 	Description:
-		Function block (FB) for converting integer to multiple bytes.
+		Conversion of input value (UINT - 16-bit) into a vector of values (BYTES).
 
 	Args:
 		(1) IN_UINT[UINT]: Input uint (2 BYTEs).
@@ -240,7 +249,7 @@ void Convert_UINT_To_Multiple_BYTES(struct Convert_UINT_To_Multiple_BYTES* inst)
 void Convert_UDINT_To_Multiple_BYTES(struct Convert_UDINT_To_Multiple_BYTES* inst){
 	/**
 	Description:
-		Function block (FB) for converting udint (unsigned int 32-bit) to multiple bytes.
+		Conversion of input value (UDINT - 32-bit) into a vector of values (BYTES).
 
 	Args:
 		(1) IN_UDINT [UDINT]: Input udint (4 BYTEs).
@@ -268,7 +277,10 @@ void Convert_UDINT_To_Multiple_BYTES(struct Convert_UDINT_To_Multiple_BYTES* ins
 void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst){
 	/**
 	Description:
-		Function block (FB) for converting multiple bits to byte.
+		Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
+	
+		Note:
+			1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
 	Args:
 		(1) IN_BIT[0 .. 7] [BIT (BOOL) ARRAY]: Input multiple bits (1 BYTE).
@@ -287,13 +299,8 @@ void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst){
 		 inst->OUT_BYTE = Result calculation from inst->IN_BIT[0 .. 7] {Part: 0 .. 255}
 	*/
 	
-	/// Create aux. variable
 	unsigned char aux_byte = 0;
-	
-	/**
-	  Convert multiple Booleans (BITs) to decimal number (BYTE)
-	  Note: 8 BITs [0 - 1] = 1 BYTE [0 - 255]
-	 */
+
 	unsigned char i;
 	for(i = 0; i < (unsigned char)(sizeof(inst->IN_BIT)/sizeof(inst->IN_BIT[0])); i++){
 		if(inst->IN_BIT[i] == 1){
@@ -307,7 +314,10 @@ void Convert_Multiple_BITS_To_Byte(struct Convert_Multiple_BITS_To_Byte* inst){
 void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst){
 	/**
 	Description:
-		Function block (FB) for converting byte to multiple bits.
+		Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
+	
+		Note:
+			8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
 	Args:
 		(1) IN_BYTE [BYTE]: Input byte.
@@ -326,21 +336,12 @@ void Convert_BYTE_To_Multiple_BITS(struct Convert_BYTE_To_Multiple_BITS* inst){
 		 inst->OUT_BIT[7] = Result calculation from inst->IN_BYTE {Part 1: 0 (false) / 1 (true)}
 	*/
 	
-	/// Create aux. variable
 	unsigned char aux_byte = inst->IN_BYTE;
 	
-	/**
-	  Convert decimal number (BYTE) to multiple Booleans (BITs)
-	  Note: 1 BYTE [0 - 255] = 8 BITs [0 - 1]
-	 */
 	unsigned char i;
 	for(i = 0; i < (unsigned char)(sizeof(inst->OUT_BIT)/sizeof(inst->OUT_BIT[0])); i++){
-		if(aux_byte > 0){
-			inst->OUT_BIT[i] = aux_byte % 2;
-			aux_byte = aux_byte/2;
-		}else{
-			inst->OUT_BIT[i] = 0;
-		}
+		inst->OUT_BIT[i] = aux_byte % 2;
+		aux_byte = aux_byte/2;
 	}
 }
 

@@ -1,7 +1,7 @@
 """
 ## =========================================================================== ## 
 MIT License
-Copyright (c) 2020 Roman Parak
+Copyright (c) 2022 Roman Parak
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -34,7 +34,8 @@ import Converter
 def main():
     """
     Description:
-        Simple tests of designed functions for data conversions.
+       Simple tests to verify the functionality of individual functions to convert 
+       data from your own library.
     """
 
     # 1\ Test No. 1: UINT <-> BYTE[]
@@ -47,7 +48,7 @@ def main():
     #   Converting multiple bytes to an uint (16-bit -> 2-byte).
     check_res_tId_2 = Converter.Convert_Multiple_BYTES_To_NUM(res_tId_2)
 
-    # Compare results
+    # Compare results.
     print('[INFO] Test No. 1: UINT <-> BYTE[]')
     if input_var == check_res_tId_2:
         print('[INFO] The calculation was completed successfully.')
@@ -64,7 +65,7 @@ def main():
     #   Converting multiple bytes to an udint (32-bit -> 4-byte).
     check_res_tId_4 = Converter.Convert_Multiple_BYTES_To_NUM(res_tId_4)
 
-    # Compare results
+    # Compare results.
     print('[INFO] Test No. 2: UDINT <-> BYTE[]')
     if input_var == check_res_tId_4:
         print('[INFO] The calculation was completed successfully.')
@@ -80,7 +81,7 @@ def main():
     #   Converting multiple bits to byte.
     check_res = Converter.Convert_Multiple_BITS_To_BYTE(res_bit_arr)
 
-    # Compare results
+    # Compare results.
     print('[INFO] Test No. 3: BYTE <-> BIT[]')
     if input_byte == check_res:
         print('[INFO] The calculation was completed successfully.')

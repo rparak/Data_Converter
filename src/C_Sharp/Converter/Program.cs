@@ -29,40 +29,85 @@ using System;
 //  Base conversion between data. 
 using Convert = DataConverter.Core;
 
-namespace Converter
+namespace ConsoleApp1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            byte[] bytes = Convert.NumberToByteArray<uint>(12345);
-            foreach (byte byte_i in bytes)
+            /*
+                Description:
+                   Simple tests to verify the functionality of individual functions to convert 
+                   data from your own library.
+             */
+
+            // 1\ Test No. 1: UINT <-> BYTE[]
+            ushort input_var_1 = 12345;
+
+            // Converting uint (16-bit -> 2-byte) to multiple bytes.
+            byte[] res_tId_1 = Convert.NumberToByteArray<ushort>(input_var_1);
+
+            // Display the results.
+            //string[] result_t1 = Array.ConvertAll(res_tId_1, x => x.ToString());
+            //Console.WriteLine("[ " + String.Join(", ", result_t1) + " ]");
+
+            // Check result:
+            // Converting multiple bytes to an uint (16-bit -> 2-byte).
+            ushort check_res_tId_1 = Convert.ByteArrayToNumber<ushort>(res_tId_1);
+
+            // Compare results.
+            Console.WriteLine("[INFO] Test No. 1: UINT <-> BYTE[]");
+            if(input_var_1 == check_res_tId_1)
             {
-                Console.WriteLine(byte_i.ToString());
+                Console.WriteLine("[INFO] The calculation was completed successfully.");
+            }
+            else
+            {
+                Console.WriteLine("[INFO] Something is wrong.");
             }
 
-            uint value = Convert.ByteArrayToNumber<uint>(bytes);
-            Console.WriteLine(value.ToString());
+            // 2\ Test No. 2: UDINT <-> BYTE[]
+            uint input_var_2 = 12345678;
 
+            // Converting uint (16-bit -> 2-byte) to multiple bytes.
+            byte[] res_tId_2 = Convert.NumberToByteArray<uint>(input_var_2);
 
-            byte[] out_b = BitConverter.GetBytes(12345);
-            foreach (byte byte_i in out_b)
+            // Check result:
+            // Converting multiple bytes to an uint (16-bit -> 2-byte).
+            uint check_res_tId_2 = Convert.ByteArrayToNumber<uint>(res_tId_2);
+
+            // Compare results.
+            Console.WriteLine("[INFO] Test No. 2: UDINT <-> BYTE[]");
+            if (input_var_2 == check_res_tId_2)
             {
-                Console.WriteLine(byte_i.ToString());
+                Console.WriteLine("[INFO] The calculation was completed successfully.");
+            }
+            else
+            {
+                Console.WriteLine("[INFO] Something is wrong.");
             }
 
-            Int16 values = BitConverter.ToInt16(out_b, 0);
-            Console.WriteLine(values);
+            // 3\ Test No. 3:  BYTE <-> BIT[]
+            // Converting uint (16-bit -> 2-byte) to multiple bytes.
+            byte input_var_3 = 123;
 
-            bool[] b_arr = Convert.ByteToBitArray(84);
+            // Converting byte (0 - 255) to multiple bits.
+            bool[] res_tId_3 = Convert.ByteToBitArray(input_var_3);
 
-            foreach (bool b_i in b_arr)
+            // Check result:
+            // Converting multiple bits to byte (0 - 255).
+            byte check_res_tId_3 = Convert.BitArrayToByte(res_tId_3);
+
+            // Compare results.
+            Console.WriteLine("[INFO] Test No. 3: BYTE <-> BIT[]");
+            if (input_var_3 == check_res_tId_3)
             {
-                Console.WriteLine(b_i.ToString());
+                Console.WriteLine("[INFO] The calculation was completed successfully.");
             }
-
-            Console.WriteLine(Convert.BitArrayToByte(b_arr));
-
+            else
+            {
+                Console.WriteLine("[INFO] Something is wrong.");
+            }
         }
     }
 }

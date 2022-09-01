@@ -30,90 +30,144 @@ using System.Collections.Generic;
 
 namespace DataConverter
 {
-    // Converts base data types to an array of bytes, and an array of bytes to base data types.
+    /*
+        Description:
+            Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+            byte to an array of bits, and an array of bits to byte.
+
+            Note: 
+                A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+     */
 
     public static class Core
     {
-        /* 
-            Description:
-                A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
-        */
+        /*
+             Description:
+                Initialization of constants.
+         */
         const byte CONST_BYTE_MAX_VALUE = byte.MaxValue;
         // 1 BYTE = 8 BIT
         const byte CONST_NUM_OF_BIT_IN_BYTE = 8;
 
-        public static byte[] NumberToByteArray<T>(T x)
+        public static byte[] NumberToByteArray<T>(T in_num)
         {
             /*
                 Description:
-                    ....
+                    Conversion of input value (T <data_type>) into a vector of values (BYTES).
 
                 Args:
-                    (1) x [...]: ...
+                    (1) in_num [T <data_type>]: Input number.
 
                 Returns:
-                    (1) parameter [...]: ...
+                    (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
+                                                
+                                                        Note:
+                                                            parameter.Length = 2 -> UINT (possible values range from 0 to 65535)
+                                                            parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+             */
 
-                */
+            dynamic in_num_dynamic  = in_num;
+            // Calculate the first index of the output array.
+            dynamic aux_out_num_dynamic = (in_num_dynamic >> (0 * CONST_NUM_OF_BIT_IN_BYTE));
 
-            List<byte> y = new List<byte>() { };
+            List<byte> out_num_arr = new List<byte>() { };
+            out_num_arr.Add((byte)aux_out_num_dynamic);
 
-            dynamic x_dynamic = x;
-            dynamic y_i = (x_dynamic >> (0 * CONST_NUM_OF_BIT_IN_BYTE));
-
-            y.Add((byte)y_i);
-
+            // Start from index 1, as the first index is already calculated.
             byte i = 1;
             while (true)
             {
-                y_i = (x_dynamic >> (i * CONST_NUM_OF_BIT_IN_BYTE));
-                if (y_i == 0)
+                aux_out_num_dynamic = (in_num_dynamic >> (i * CONST_NUM_OF_BIT_IN_BYTE));
+                if (aux_out_num_dynamic == 0)
                 {
                     break;
                 }
                 else
                 {
-                    y.Add((byte)y_i);
+                    out_num_arr.Add((byte)aux_out_num_dynamic);
                     ++i;
                 }
             }
 
-            return y.ToArray();
+            return out_num_arr.ToArray();
         }
 
-        public static T ByteArrayToNumber<T>(byte[] x)
+        public static T ByteArrayToNumber<T>(byte[] in_byte_arr)
         {
-            dynamic y = (T)Convert.ChangeType(x[0] * Math.Pow(CONST_BYTE_MAX_VALUE + 1, 0), typeof(T));
-            foreach (var (x_i, i) in x.Skip(1).Select((x_i, i) => (x_i, i)))
+            /*
+                Description:
+                    Conversion of a vector of values (BYTES) to a value (T <data_type>).
+
+                Args:
+                    (1) in_byte_arr [USINT {Byte} Array]: Input multiple numbers. Possible values range from 0 to 255 in each array index.
+                                                    
+                                                    Note:
+                                                        in_byte_arr.Length = 2 -> UINT (possible values range from 0 to 65535)
+                                                        in_byte_arr.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+
+                Returns:
+                    (1) parameter [T <data_type>]: Output number.
+             */
+
+            dynamic out_num_dynamic = (T)Convert.ChangeType(in_byte_arr[0] * Math.Pow(CONST_BYTE_MAX_VALUE + 1, 0), typeof(T));
+            // Start from index 1, as the first index is already calculated.
+            //  Note: arr.Skip(1)
+            foreach (var (in_byte_arr_i, i) in in_byte_arr.Skip(1).Select((in_byte_arr_i, i) => (in_byte_arr_i, i)))
             {
-                y += (T)Convert.ChangeType(x_i * Math.Pow(CONST_BYTE_MAX_VALUE + 1, i + 1), typeof(T));
+                out_num_dynamic += (T)Convert.ChangeType(in_byte_arr_i * Math.Pow(CONST_BYTE_MAX_VALUE + 1, i + 1), typeof(T));
             }
 
-            return y;
+            return (T)out_num_dynamic;
         }
 
-        public static bool[] ByteToBitArray(byte x)
+        public static bool[] ByteToBitArray(byte in_byte)
         {
-            bool[] y = new bool[CONST_NUM_OF_BIT_IN_BYTE];
+            /*
+                Description:
+                    Conversion of input value (BYTE) into a vector of logical values (BITs = Booleans).
+                    
+                    Note:
+                        1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
-            for (byte i = 0; i < y.Length; ++i)
+                Args:
+                    (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
+
+                Returns:
+                    (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output multiple bits (1 BYTE).
+             */
+
+            bool[] out_bit_arr = new bool[CONST_NUM_OF_BIT_IN_BYTE];
+            for (byte i = 0; i < out_bit_arr.Length; ++i)
             {
-                y[i] = (1 == ((x >> i) & 1));
+                out_bit_arr[i] = (1 == ((in_byte >> i) & 1));
             }
 
-            return y;
+            return out_bit_arr;
         }
 
-        public static byte BitArrayToByte(bool[] x)
+        public static byte BitArrayToByte(bool[] in_bit_arr)
         {
-            byte y = 0;
+            /*
+                Description:
+                    Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
 
-            foreach (var (x_i, i) in x.Select((x_i, i) => (x_i, i)))
+                    Note:
+                        8 BITs [0 - 1] = 1 BYTE [0 - 255]
+
+                Args:
+                    (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input multiple bits (1 BYTE). 
+
+                Returns:
+                    (1) parameter [USINT {Byte}]: Output number (BYTE -> possible values range from 0 to 255)..
+             */
+
+            byte out_byte = 0;
+            foreach (var (in_bit_arr_i, i) in in_bit_arr.Select((in_bit_arr_i, i) => (in_bit_arr_i, i)))
             {
-                y = (x_i == true ? (byte)(y + Math.Pow(2, i)) : y);
+                out_byte = (in_bit_arr_i == true ? (byte)(out_byte + Math.Pow(2, i)) : out_byte);
             }
 
-            return y;
+            return out_byte;
         }
     }
 }

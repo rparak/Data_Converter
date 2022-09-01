@@ -1,7 +1,7 @@
 """
 ## =========================================================================== ## 
 MIT License
-Copyright (c) 2020 Roman Parak
+Copyright (c) 2022 Roman Parak
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -30,7 +30,16 @@ import numpy as np
 
 """
 Description:
-    A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+    Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+    byte to an array of bits, and an array of bits to byte.
+
+    Note: 
+        A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+"""
+
+"""
+Description:
+    Initialization of constants.
 """
 CONST_NUM_OF_VALUES_IN_BYTE = 256
 CONST_NUM_OF_BIT_IN_BYTE    = 8
@@ -122,8 +131,10 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
 def Convert_BYTE_To_Multiple_BITS(in_byte):
     """
     Description:
-        Conversion of input value (BYTE) into a vector of logical values (BITS).
+        Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
         
+        Note:
+            1 BYTE [0 - 255] = 8 BITs [0 - 1]
     Args:
         (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
         
@@ -137,8 +148,6 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
         # Create aux. variable
         aux_byte = in_byte
         
-        # Convert decimal number (BYTE) to multiple Booleans (BITs).
-        # Note: 1 BYTE [0 - 255] = 8 BITs [0 - 1]
         out_bit_arr = np.zeros(CONST_NUM_OF_BIT_IN_BYTE, dtype=np.bool_)
         
         for i in range(CONST_NUM_OF_BIT_IN_BYTE):
@@ -154,7 +163,10 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
 def Convert_Multiple_BITS_To_BYTE(in_bit_arr):
     """
     Description:
-        Conversion of a vector of logical values (BITS) to a value (BYTE).
+        Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
+
+        Note:
+            8 BITs [0 - 1] = 1 BYTE [0 - 255]
         
     Args:
         (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input multiple bits (1 BYTE).
@@ -166,10 +178,7 @@ def Convert_Multiple_BITS_To_BYTE(in_bit_arr):
     try: 
         assert in_bit_arr.size == CONST_NUM_OF_BIT_IN_BYTE
 
-        # Convert multiple Booleans (BITs) to decimal number (BYTE)
-        # Note: 8 BITs [0 - 1] = 1 BYTE [0 - 255]
         out_byte = 0
-
         for i, in_bit_arr_i in enumerate(in_bit_arr):
             if CONST_DATA_TYPE_LOWER_LIMIT < in_bit_arr_i < CONST_BOOL_UPPER_LIMIT:
                 assert False
