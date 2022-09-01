@@ -43,7 +43,9 @@ def main():
     input_var = 12345
     input_tId = 2
     res_tId_2 = Converter.Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
-
+    # Little-endian
+    print([(input_var & (0xff << pos*8)) >> pos*8 for pos in range(2)])
+    # Big-endian ->reverse array
     # Check result: 
     #   Converting multiple bytes to an uint (16-bit -> 2-byte).
     check_res_tId_2 = Converter.Convert_Multiple_BYTES_To_NUM(res_tId_2)
