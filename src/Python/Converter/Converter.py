@@ -25,8 +25,6 @@ File Name: Converter.py
 ## =========================================================================== ## 
 """
 
-# System (Default Lib.)
-import sys
 # Numpy (Array computing Lib.) [pip3 install numpy]
 import numpy as np
 
@@ -183,62 +181,3 @@ def Convert_Multiple_BITS_To_BYTE(in_bit_arr):
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
         print(f'[ERROR] Information: {error}')
-
-def main():
-    """
-    Description:
-        Simple tests of designed functions for data conversions.
-    """
-
-    # 1\ Test No. 1: UINT <-> BYTE[]
-    #   Converting uint (16-bit -> 2-byte) to multiple bytes.
-    input_var = 12345
-    input_tId = 2
-    res_tId_2 = Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
-
-    # Check result: 
-    #   Converting multiple bytes to an uint (16-bit -> 2-byte).
-    check_res_tId_2 = Convert_Multiple_BYTES_To_NUM(res_tId_2)
-
-    # Compare results
-    print('[INFO] Test No. 1: UINT <-> BYTE[]')
-    if input_var == check_res_tId_2:
-        print('[INFO] The calculation was completed successfully.')
-    else:
-        print('[INFO] Something is wrong.')
-
-    # 2\ Test No. 2: UDINT <-> BYTE[]
-    #   Converting udint (32-bit -> 4-byte) to multiple bytes.
-    input_var = 12345678
-    input_tId = 4
-    res_tId_4 = Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
-
-    # Check result: 
-    #   Converting multiple bytes to an udint (32-bit -> 4-byte).
-    check_res_tId_4 = Convert_Multiple_BYTES_To_NUM(res_tId_4)
-
-    # Compare results
-    print('[INFO] Test No. 2: UDINT <-> BYTE[]')
-    if input_var == check_res_tId_4:
-        print('[INFO] The calculation was completed successfully.')
-    else:
-        print('[INFO] Something is wrong.')
-
-    # 3\ Test No. 3:  BYTE <-> BIT[]
-    #   Converting byte to multiple bits.
-    input_byte  = 123
-    res_bit_arr = Convert_BYTE_To_Multiple_BITS(input_byte)
-
-    # Check result: 
-    #   Converting multiple bits to byte.
-    check_res = Convert_Multiple_BITS_To_BYTE(res_bit_arr)
-
-    # Compare results
-    print('[INFO] Test No. 3: BYTE <-> BIT[]')
-    if input_byte == check_res:
-        print('[INFO] The calculation was completed successfully.')
-    else:
-        print('[INFO] Something is wrong.')
-
-if __name__ == '__main__':
-    sys.exit(main())
