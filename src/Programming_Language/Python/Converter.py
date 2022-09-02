@@ -49,20 +49,21 @@ def Convert_NUM_To_Multiple_BYTES(in_num, out_size):
     """
     Description:
         Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
-
-        Note:
-            UINT: 16-bit -> 2-byte
-            UDINT: 32-bit -> 4-byte
         
     Args:
         (1) in_num [UINT / UDINT]: Input number (2 -> possible values range from 0 to 65535 / 4 BYTEs -> possible values range from 0 to 4294967295).
         (2) out_size [USINT {Byte}]: The size of the output byte array.
 
                                      Identification number: 
-                                        2 -> 2 BYTEs OUT, 4 -> BYTEs OUT
+                                        out_size = 2 (BYTEs OUT)
+                                        out_size = 4 (BYTEs OUT)
         
     Returns:
         (1) parameter [USINT {Byte} Array (2, 4)]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
+                                                   
+                                                   Note:
+                                                        parameter.siez = 2 -> UINT (possible values range from 0 to 65535)
+                                                        parameter.size = 4 -> UDINT (possible values range from 0 to 4294967295)
     """
  
     try:
@@ -85,16 +86,16 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
     """
     Description:
         Conversion of a vector of values (BYTES) to a value (UINT/UDINT).
-
-        Note:
-            UINT: 16-bit -> 2-byte
-            UDINT: 32-bit -> 4-byte
         
     Args:
         (1) in_byte_arr [USINT {Byte} Array (2, 4)]: Input multiple numbers. Possible values range from 0 to 255 in each array index.
-        
+
+                                                     Note:
+                                                        in_byte_arr.size = 2 -> UINT (possible values range from 0 to 65535)
+                                                        in_byte_arr.size = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                        
     Returns:
-        (1) parameter [UINT / UDINT]: Output number (2 -> possible values range from 0 to 65535 / 4 BYTEs -> possible values range from 0 to 4294967295).
+        (1) parameter [UINT / UDINT]: Output number.
     """
         
     try: 
