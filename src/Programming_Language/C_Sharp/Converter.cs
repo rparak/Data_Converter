@@ -47,9 +47,9 @@ namespace DataConverter
          */
         const byte CONST_BYTE_MAX_VALUE = byte.MaxValue;
         // 1 BYTE = 8 BIT
-        const byte CONST_NUM_OF_BIT_IN_BYTE = 8;
+        const byte CONST_NUM_OF_BIT_IN_BYTE = 0x08;
 
-        public static byte[] NumberToByteArray<T>(T in_num)
+        public static byte[] NumberToByteArray<T>(T in_num, byte out_size)
         {
             /*
                 Description:
@@ -57,6 +57,11 @@ namespace DataConverter
 
                 Args:
                     (1) in_num [T <data_type>]: Input number.
+                    (2) out_size [USINT {Byte}]: The size of the output byte array.
+
+                                                 Identification number: 
+                                                    out_size = 2 (BYTEs OUT)
+                                                    out_size = 4 (BYTEs OUT)
 
                 Returns:
                     (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
@@ -66,6 +71,7 @@ namespace DataConverter
                                                             parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
              */
 
+            /*
             dynamic in_num_dynamic  = in_num;
             // Calculate the first index of the output array.
             dynamic aux_out_num_dynamic = (in_num_dynamic >> (0 * CONST_NUM_OF_BIT_IN_BYTE));
@@ -90,6 +96,16 @@ namespace DataConverter
             }
 
             return out_num_arr.ToArray();
+             */
+            dynamic in_num_dynamic = in_num;
+
+            byte[] out_num_arr = new byte[out_size];
+            for (byte i = 0; i < out_size; ++i)
+            {
+                out_num_arr[i] = (byte)((in_num_dynamic >> i * 0x08) & 0xff);
+            }
+
+            return out_num_arr;
         }
 
         public static T ByteArrayToNumber<T>(byte[] in_byte_arr)
@@ -109,12 +125,13 @@ namespace DataConverter
                     (1) parameter [T <data_type>]: Output number.
              */
 
-            dynamic out_num_dynamic = (T)Convert.ChangeType(in_byte_arr[0] * Math.Pow(CONST_BYTE_MAX_VALUE + 1, 0), typeof(T));
+            dynamic out_num_dynamic = (T)Convert.ChangeType(0 | in_byte_arr[0] << 0 * 0x08, typeof(T));
+
             // Start from index 1, as the first index is already calculated.
             //  Note: arr.Skip(1)
             foreach (var (in_byte_arr_i, i) in in_byte_arr.Skip(1).Select((in_byte_arr_i, i) => (in_byte_arr_i, i)))
             {
-                out_num_dynamic += (T)Convert.ChangeType(in_byte_arr_i * Math.Pow(CONST_BYTE_MAX_VALUE + 1, i + 1), typeof(T));
+                out_num_dynamic |= (T)Convert.ChangeType(in_byte_arr_i << (i + 0x01) * 0x08, typeof(T));
             }
 
             return (T)out_num_dynamic;
@@ -139,7 +156,7 @@ namespace DataConverter
             bool[] out_bit_arr = new bool[CONST_NUM_OF_BIT_IN_BYTE];
             for (byte i = 0; i < out_bit_arr.Length; ++i)
             {
-                out_bit_arr[i] = (1 == ((in_byte >> i) & 1));
+                out_bit_arr[i] = (1 == ((in_byte >> i * 0x01) & 0x01));
             }
 
             return out_bit_arr;
@@ -165,6 +182,7 @@ namespace DataConverter
             foreach (var (in_bit_arr_i, i) in in_bit_arr.Select((in_bit_arr_i, i) => (in_bit_arr_i, i)))
             {
                 out_byte = (in_bit_arr_i == true ? (byte)(out_byte + Math.Pow(2, i)) : out_byte);
+                //out_byte |= (byte)((in_bit_arr_i << i) * 0x01);
             }
 
             return out_byte;
