@@ -33,30 +33,19 @@ Description:
     Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
     byte to an array of bits, and an array of bits to byte.
 
-    Note: 
+    Note 1: 
         A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+    Note 2:
+        USINT: Unsigned (short) INT  [0, 255]
+        UINT : Unsigned INT          [0, 65535]
+        UDINT: Unsigned (double) INT [0, 4294967295]
 """
+CONST_ZERO = 0x00
+CONST_USINT_UPPER_LIMIT = np.iinfo(np.uint8).max
+CONST_UINT_UPPER_LIMIT  = np.iinfo(np.uint16).max 
+CONST_UDINT_UPPER_LIMIT = np.iinfo(np.uint32).max 
 
-"""
-Description:
-    Initialization of constants.
-"""
-CONST_NUM_OF_VALUES_IN_BYTE = 256
-CONST_NUM_OF_BIT_IN_BYTE    = 8
-CONST_DATA_TYPE_LOWER_LIMIT = 0
-
-"""
-Notes:
-    USINT: Unsigned (short) INT  [0, 255]
-    UINT : Unsigned INT          [0, 65535]
-    UDINT: Unsigned (double) INT [0, 4294967295]
-"""
-CONST_BOOL_UPPER_LIMIT      = 1
-CONST_USINT_UPPER_LIMIT     = np.iinfo(np.uint8).max 
-CONST_UINT_UPPER_LIMIT      = np.iinfo(np.uint16).max 
-CONST_UDINT_UPPER_LIMIT     = np.iinfo(np.uint32).max 
-
-def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
+def Convert_NUM_To_Multiple_BYTES(in_num, out_size):
     """
     Description:
         Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
@@ -67,30 +56,26 @@ def Convert_NUM_To_Multiple_BYTES(in_num, type_id):
         
     Args:
         (1) in_num [UINT / UDINT]: Input number (2 -> possible values range from 0 to 65535 / 4 BYTEs -> possible values range from 0 to 4294967295).
-        (2) type_id [USINT {Byte}]: Type of calculation. 
-                                    Identification number: 2 -> 2 BYTEs OUT, 4 -> BYTEs OUT
+        (2) out_size [USINT {Byte}]: The size of the output byte array.
+
+                                     Identification number: 
+                                        2 -> 2 BYTEs OUT, 4 -> BYTEs OUT
         
     Returns:
         (1) parameter [USINT {Byte} Array (2, 4)]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
     """
  
     try:
-        assert type_id == 2 or type_id == 4
-        assert ((type_id == 2 and (CONST_DATA_TYPE_LOWER_LIMIT <= in_num <= CONST_UINT_UPPER_LIMIT)) or \
-                (type_id == 4 and (CONST_DATA_TYPE_LOWER_LIMIT <= in_num <= CONST_UDINT_UPPER_LIMIT)))
-
-        # Create aux. variable.
-        aux_var = int(in_num/CONST_NUM_OF_VALUES_IN_BYTE)
-
-        out_num_arr = np.zeros(type_id, dtype = np.uint8)
-        # Calculate the first index of the output array.
-        out_num_arr[0] = int(in_num) % CONST_NUM_OF_VALUES_IN_BYTE
+        assert ((out_size == 2 and (0x00 <= in_num <= CONST_UINT_UPPER_LIMIT)) or \
+                (out_size == 4 and (0x00 <= in_num <= CONST_UDINT_UPPER_LIMIT)))
         
-        for i in range(1, type_id):
-            out_num_arr[i] = int(aux_var) % CONST_NUM_OF_VALUES_IN_BYTE
-            aux_var /= CONST_NUM_OF_VALUES_IN_BYTE
-        
+        out_num_arr = np.empty(out_size, dtype=np.uint8)
+        for i in range(out_size):
+            out_num_arr[i] = (in_num >> i * 0x08) & 0xff
+            
         return out_num_arr
+
+        #return np.array([(in_num >> i * 0x08) & 0xff for i in range(type_id)], dtype=np.uint8)
 
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
@@ -117,10 +102,7 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
 
         out_num = 0
         for i, in_byte_arr_i in enumerate(in_byte_arr):
-            if CONST_DATA_TYPE_LOWER_LIMIT > in_byte_arr_i > CONST_USINT_UPPER_LIMIT:
-                assert False
-
-            out_num += in_byte_arr_i * (CONST_NUM_OF_VALUES_IN_BYTE**i)
+            out_num |= in_byte_arr_i << i * 0x08
             
         return out_num
 
@@ -143,16 +125,11 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
     """
         
     try: 
-        assert CONST_DATA_TYPE_LOWER_LIMIT <= in_byte <= CONST_USINT_UPPER_LIMIT
+        assert CONST_ZERO <= in_byte <= CONST_USINT_UPPER_LIMIT
 
-        # Create aux. variable
-        aux_byte = in_byte
-        
-        out_bit_arr = np.zeros(CONST_NUM_OF_BIT_IN_BYTE, dtype=np.bool_)
-        
-        for i in range(CONST_NUM_OF_BIT_IN_BYTE):
-            out_bit_arr[i] = aux_byte % 2
-            aux_byte = int(aux_byte / 2)
+        out_bit_arr = np.empty(8, dtype=np.bool_)
+        for i in range(8):
+            out_bit_arr[i] = (in_byte >> i * 0x01) & 0x01 
 
         return out_bit_arr
 
@@ -176,14 +153,11 @@ def Convert_Multiple_BITS_To_BYTE(in_bit_arr):
     """
 
     try: 
-        assert in_bit_arr.size == CONST_NUM_OF_BIT_IN_BYTE
+        assert in_bit_arr.size == 0x08
 
         out_byte = 0
         for i, in_bit_arr_i in enumerate(in_bit_arr):
-            if CONST_DATA_TYPE_LOWER_LIMIT < in_bit_arr_i < CONST_BOOL_UPPER_LIMIT:
-                assert False
-
-            out_byte += 2**i if in_bit_arr_i == CONST_BOOL_UPPER_LIMIT else CONST_DATA_TYPE_LOWER_LIMIT
+            out_byte |= in_bit_arr_i << i * 0x01
 
         return out_byte
 
