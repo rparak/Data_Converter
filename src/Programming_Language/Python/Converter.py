@@ -45,7 +45,7 @@ CONST_USINT_UPPER_LIMIT = np.iinfo(np.uint8).max
 CONST_UINT_UPPER_LIMIT  = np.iinfo(np.uint16).max 
 CONST_UDINT_UPPER_LIMIT = np.iinfo(np.uint32).max 
 
-def Convert_NUM_To_Multiple_BYTES(in_num, out_size):
+def Convert_Number_To_Byte_Array(in_num, out_size):
     """
     Description:
         Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
@@ -82,7 +82,7 @@ def Convert_NUM_To_Multiple_BYTES(in_num, out_size):
         print('[ERROR] Invalid input. Please try again ...')
         print(f'[ERROR] Information: {error}')
 
-def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
+def Convert_Byte_Array_To_Number(in_byte_arr):
     """
     Description:
         Conversion of a vector of values (BYTES) to a value (UINT/UDINT).
@@ -111,7 +111,7 @@ def Convert_Multiple_BYTES_To_NUM(in_byte_arr):
         print('[ERROR] Invalid input. Please try again ...')
         print(f'[ERROR] Information: {error}')
 
-def Convert_BYTE_To_Multiple_BITS(in_byte):
+def Convert_Byte_To_Bit_Array(in_byte):
     """
     Description:
         Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
@@ -138,7 +138,7 @@ def Convert_BYTE_To_Multiple_BITS(in_byte):
         print('[ERROR] Invalid input. Please try again ...')
         print(f'[ERROR] Information: {error}')
 
-def Convert_Multiple_BITS_To_BYTE(in_bit_arr):
+def Convert_Bit_Array_To_BYTE(in_bit_arr):
     """
     Description:
         Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).

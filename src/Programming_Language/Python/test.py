@@ -42,12 +42,12 @@ def main():
     #   Converting uint (16-bit -> 2-byte) to multiple bytes.
     input_var = 12345
     input_tId = 2
-    res_tId_2 = Converter.Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
+    res_tId_2 = Converter.Convert_Number_To_Byte_Array(input_var, input_tId)
 
     # Big-endian ->reverse array
     # Check result: 
     #   Converting multiple bytes to an uint (16-bit -> 2-byte).
-    check_res_tId_2 = Converter.Convert_Multiple_BYTES_To_NUM(res_tId_2)
+    check_res_tId_2 = Converter.Convert_Byte_Array_To_Number(res_tId_2)
 
     # Compare results.
     print('[INFO] Test No. 1: UINT <-> BYTE[]')
@@ -60,11 +60,11 @@ def main():
     #   Converting udint (32-bit -> 4-byte) to multiple bytes.
     input_var = 12345678
     input_tId = 4
-    res_tId_4 = Converter.Convert_NUM_To_Multiple_BYTES(input_var, input_tId)
+    res_tId_4 = Converter.Convert_Number_To_Byte_Array(input_var, input_tId)
 
     # Check result: 
     #   Converting multiple bytes to an udint (32-bit -> 4-byte).
-    check_res_tId_4 = Converter.Convert_Multiple_BYTES_To_NUM(res_tId_4)
+    check_res_tId_4 = Converter.Convert_Byte_Array_To_Number(res_tId_4)
 
     # Compare results.
     print('[INFO] Test No. 2: UDINT <-> BYTE[]')
@@ -76,11 +76,11 @@ def main():
     # 3\ Test No. 3:  BYTE <-> BIT[]
     #   Converting byte to multiple bits.
     input_byte  = 123
-    res_bit_arr = Converter.Convert_BYTE_To_Multiple_BITS(input_byte)
+    res_bit_arr = Converter.Convert_Byte_To_Bit_Array(input_byte)
 
     # Check result: 
     #   Converting multiple bits to byte.
-    check_res = Converter.Convert_Multiple_BITS_To_BYTE(res_bit_arr)
+    check_res = Converter.Convert_Bit_Array_To_BYTE(res_bit_arr)
 
     # Compare results.
     print('[INFO] Test No. 3: BYTE <-> BIT[]')

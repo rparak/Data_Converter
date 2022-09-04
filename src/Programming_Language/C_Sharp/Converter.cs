@@ -71,32 +71,6 @@ namespace DataConverter
                                                             parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
              */
 
-            /*
-            dynamic in_num_dynamic  = in_num;
-            // Calculate the first index of the output array.
-            dynamic aux_out_num_dynamic = (in_num_dynamic >> (0 * CONST_NUM_OF_BIT_IN_BYTE));
-
-            List<byte> out_num_arr = new List<byte>() { };
-            out_num_arr.Add((byte)aux_out_num_dynamic);
-
-            // Start from index 1, as the first index is already calculated.
-            byte i = 1;
-            while (true)
-            {
-                aux_out_num_dynamic = (in_num_dynamic >> (i * CONST_NUM_OF_BIT_IN_BYTE));
-                if (aux_out_num_dynamic == 0)
-                {
-                    break;
-                }
-                else
-                {
-                    out_num_arr.Add((byte)aux_out_num_dynamic);
-                    ++i;
-                }
-            }
-
-            return out_num_arr.ToArray();
-             */
             dynamic in_num_dynamic = in_num;
 
             byte[] out_num_arr = new byte[out_size];
@@ -181,8 +155,7 @@ namespace DataConverter
             byte out_byte = 0;
             foreach (var (in_bit_arr_i, i) in in_bit_arr.Select((in_bit_arr_i, i) => (in_bit_arr_i, i)))
             {
-                out_byte = (in_bit_arr_i == true ? (byte)(out_byte + Math.Pow(2, i)) : out_byte);
-                //out_byte |= (byte)((in_bit_arr_i << i) * 0x01);
+                out_byte |= (in_bit_arr_i == true ? (byte)(1 << i * 0x01) : out_byte);
             }
 
             return out_byte;
