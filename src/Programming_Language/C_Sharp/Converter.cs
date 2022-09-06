@@ -35,20 +35,25 @@ namespace DataConverter
             Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
             byte to an array of bits, and an array of bits to byte.
 
-            Note: 
-                A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+        Note 1: 
+            A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+
+        Note 2:
+            BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
+            USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
+            UINT        : Unsigned INT          [0, 65535]      | 16-bit
+            UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+
+        Note 3:
+            Bitwise Operators:
+                &	Bitwise AND
+                |	Bitwise OR
+                <<	Shift left
+                >>	Shift right
      */
 
     public static class Core
     {
-        /*
-             Description:
-                Initialization of constants.
-         */
-        const byte CONST_BYTE_MAX_VALUE = byte.MaxValue;
-        // 1 BYTE = 8 BIT
-        const byte CONST_NUM_OF_BIT_IN_BYTE = 0x08;
-
         public static byte[] NumberToByteArray<T>(T in_num, byte out_size)
         {
             /*

@@ -35,10 +35,19 @@ Description:
 
     Note 1: 
         A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+        
     Note 2:
-        USINT: Unsigned (short) INT  [0, 255]
-        UINT : Unsigned INT          [0, 65535]
-        UDINT: Unsigned (double) INT [0, 4294967295]
+		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
+        USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
+        UINT        : Unsigned INT          [0, 65535]      | 16-bit
+        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+
+    Note 3:
+        Bitwise Operators:
+            &	Bitwise AND
+            |	Bitwise OR
+            <<	Shift left
+            >>	Shift right
 """
 CONST_ZERO = 0x00
 CONST_USINT_UPPER_LIMIT = np.iinfo(np.uint8).max

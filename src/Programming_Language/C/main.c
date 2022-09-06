@@ -3,9 +3,6 @@
 #include <cstdlib>
 #include <time.h>
 
-// g++ main.c -o main
-// ./main
-
 unsigned char* Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
 {
     static unsigned char* out_num_arr;
@@ -53,9 +50,13 @@ unsigned short Bit_Array_To_Byte(bool* in_bit_array){
     return out_byte;
 }
 
+// g++ main.c -o main
+// ./main
+
 int main() {
    unsigned short input_var_1 = 12345;
    unsigned char* out_num_arr;
+   /*
    // Calculate the time taken by fun()
    clock_t t;
    t = clock();
@@ -64,8 +65,10 @@ int main() {
    }
    t = clock() - t;
    double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-
    printf("fun() took %f seconds to execute \n", time_taken);
+   */
+
+   out_num_arr = Number_To_Byte_Array(input_var_1, 2);
 
    printf("%d %d", out_num_arr[0], out_num_arr[1]);
    printf("\n");

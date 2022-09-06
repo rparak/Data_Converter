@@ -35,16 +35,14 @@
 /** < Custom Lib.: Base conversion between data. */
 #include <Converter.h>
 
-
 /** < Local Variables:  */
 // Function blocks for conversion between different types.
-_LOCAL struct Convert_Multiple_BYTES_To_UINT CM_BYTES_To_UINT_1;
-_LOCAL struct Convert_Multiple_BYTES_To_UDINT CM_BYTES_To_UDINT_1;
-_LOCAL struct Convert_UINT_To_Multiple_BYTES C_UINT_To_M_BYTES_1;
-_LOCAL struct Convert_UDINT_To_Multiple_BYTES C_UDINT_To_M_BYTES_1;
-_LOCAL struct Convert_Multiple_BITS_To_Byte CM_BITS_To_Byte_1;
-_LOCAL struct Convert_BYTE_To_Multiple_BITS C_BYTE_To_M_BITS_1;
-
+_LOCAL struct Convert_USINT_Array_To_UINT C_USINT_Arr_To_UINT_1;
+_LOCAL struct Convert_USINT_Array_To_UDINT C_USINT_Arr_To_UDINT_1;
+_LOCAL struct Convert_UINT_To_USINT_Array C_UINT_To_USINT_Arr_1;
+_LOCAL struct Convert_UDINT_To_USINT_Array C_UDINT_To_USINT_Arr_1;
+_LOCAL struct Convert_BOOL_Array_To_USINT C_BOOL_Arr_To_USINT_1;
+_LOCAL struct Convert_USINT_To_BOOL_Array C_USINT_To_BOOL_Arr_1;
 
 // Compare results variable.
 _LOCAL BOOL RES_VAR[3];
@@ -55,84 +53,81 @@ _LOCAL BOOL RES_VAR[3];
 void _INIT ProgramInit(void)
 {
 	// Test no. 1: Input
-	C_UINT_To_M_BYTES_1.IN_UINT = 12345;
+	C_UINT_To_USINT_Arr_1.INPUT = 12345;
 	// Test no. 2: Input
-	C_UDINT_To_M_BYTES_1.IN_UDINT = 12345678;
+	C_UDINT_To_USINT_Arr_1.INPUT = 12345678;
 	// Test no. 3: Input
-	C_BYTE_To_M_BITS_1.IN_BYTE = 123; 
+	C_USINT_To_BOOL_Arr_1.INPUT = 123; 
 }
 
 /**
  * Program Cyclic 
  * 
- * Duration (Cycle Time): 10000 [µs] 
- * Tolerance            : 10000 [µs]
+ * Duration (Cycle Time): 10000 [ms] 
+ * Tolerance            : 10000 [ms]
  */
 void _CYCLIC ProgramCyclic(void)
 {
-	// Note: Copy Array
-	// 	memcpy(CM_BYTES_To_UINT_1.IN_BYTE, C_UINT_To_M_BYTES_1.OUT_BYTE, sizeof(C_UINT_To_M_BYTES_1.OUT_BYTE));
-	
 	/**
-	* 1\ Test No. 1: UINT <-> BYTE[]
+	* 1\ Test No. 1: UINT <-> USINT[]
 	*/
 	// Converting uint (16-bit -> 2-byte) to multiple bytes.
-	Convert_UINT_To_Multiple_BYTES(&C_UINT_To_M_BYTES_1);
+	Convert_UINT_To_USINT_Array(&C_UINT_To_USINT_Arr_1);
 	
 	// Check result:
 	// 	Converting multiple bytes to an uint (16-bit -> 2-byte).
-	CM_BYTES_To_UINT_1.IN_BYTE[0] = C_UINT_To_M_BYTES_1.OUT_BYTE[0];
-	CM_BYTES_To_UINT_1.IN_BYTE[1] = C_UINT_To_M_BYTES_1.OUT_BYTE[1]; 
-	Convert_Multiple_BYTES_To_UINT(&CM_BYTES_To_UINT_1);
+	C_USINT_Arr_To_UINT_1.INPUT[0] = C_UINT_To_USINT_Arr_1.OUTPUT[0];
+	C_USINT_Arr_To_UINT_1.INPUT[1] = C_UINT_To_USINT_Arr_1.OUTPUT[1]; 
+	Convert_USINT_Array_To_UINT(&C_USINT_Arr_To_UINT_1);
 	
 	// Compare results.
-	if(C_UINT_To_M_BYTES_1.IN_UINT == CM_BYTES_To_UINT_1.OUT_UINT){
+	if(C_UINT_To_USINT_Arr_1.INPUT == C_USINT_Arr_To_UINT_1.OUTPUT){
 		RES_VAR[0] = 1;
 	}else{
 		RES_VAR[0] = 0;
 	}
 	
 	/**
-	* 2\ Test No. 2: UDINT <-> BYTE[]
+	* 2\ Test No. 2: UDINT <-> USINT[]
 	*/
 	// Converting udint (32-bit -> 4-byte) to multiple bytes.
-	Convert_UDINT_To_Multiple_BYTES(&C_UDINT_To_M_BYTES_1);
+	Convert_UDINT_To_USINT_Array(&C_UDINT_To_USINT_Arr_1);
 	
 	// Check result:
 	// 	Converting multiple bytes to an udint (32-bit -> 4-byte).
-	CM_BYTES_To_UDINT_1.IN_BYTE[0] = C_UDINT_To_M_BYTES_1.OUT_BYTE[0];
-	CM_BYTES_To_UDINT_1.IN_BYTE[1] = C_UDINT_To_M_BYTES_1.OUT_BYTE[1]; 
-	CM_BYTES_To_UDINT_1.IN_BYTE[2] = C_UDINT_To_M_BYTES_1.OUT_BYTE[2]; 
-	CM_BYTES_To_UDINT_1.IN_BYTE[3] = C_UDINT_To_M_BYTES_1.OUT_BYTE[3]; 
-	Convert_Multiple_BYTES_To_UDINT(&CM_BYTES_To_UDINT_1);
+	C_USINT_Arr_To_UDINT_1.INPUT[0] = C_UDINT_To_USINT_Arr_1.OUTPUT[0];
+	C_USINT_Arr_To_UDINT_1.INPUT[1] = C_UDINT_To_USINT_Arr_1.OUTPUT[1]; 
+	C_USINT_Arr_To_UDINT_1.INPUT[2] = C_UDINT_To_USINT_Arr_1.OUTPUT[2]; 
+	C_USINT_Arr_To_UDINT_1.INPUT[3] = C_UDINT_To_USINT_Arr_1.OUTPUT[3]; 
+	Convert_USINT_Array_To_UDINT(&C_USINT_Arr_To_UDINT_1);
 	
 	// Compare results.
-	if(C_UDINT_To_M_BYTES_1.IN_UDINT == CM_BYTES_To_UDINT_1.OUT_UDINT){
+	if(C_UDINT_To_USINT_Arr_1.INPUT == C_USINT_Arr_To_UDINT_1.OUTPUT){
 		RES_VAR[1] = 1;
 	}else{
 		RES_VAR[1] = 0;
 	}
 	
 	/**
-	* 3\ Test No. 3:  BYTE <-> BIT[]
+	* 3\ Test No. 3:  USINT <-> BOOL[]
 	*/
 	// Converting byte to multiple bits.
-	Convert_BYTE_To_Multiple_BITS(&C_BYTE_To_M_BITS_1);
+	Convert_USINT_To_BOOL_Array(&C_USINT_To_BOOL_Arr_1);
 	
 	// Check result:
 	// 	Converting multiple bits to byte.
-	CM_BITS_To_Byte_1.IN_BIT[0] = C_BYTE_To_M_BITS_1.OUT_BIT[0];
-	CM_BITS_To_Byte_1.IN_BIT[1] = C_BYTE_To_M_BITS_1.OUT_BIT[1];
-	CM_BITS_To_Byte_1.IN_BIT[2] = C_BYTE_To_M_BITS_1.OUT_BIT[2];
-	CM_BITS_To_Byte_1.IN_BIT[3] = C_BYTE_To_M_BITS_1.OUT_BIT[3];
-	CM_BITS_To_Byte_1.IN_BIT[4] = C_BYTE_To_M_BITS_1.OUT_BIT[4];
-	CM_BITS_To_Byte_1.IN_BIT[5] = C_BYTE_To_M_BITS_1.OUT_BIT[5];
-	CM_BITS_To_Byte_1.IN_BIT[6] = C_BYTE_To_M_BITS_1.OUT_BIT[6];
-	CM_BITS_To_Byte_1.IN_BIT[7] = C_BYTE_To_M_BITS_1.OUT_BIT[7];
-	Convert_Multiple_BITS_To_Byte(&CM_BITS_To_Byte_1);
+	C_BOOL_Arr_To_USINT_1.INPUT[0] = C_USINT_To_BOOL_Arr_1.OUTPUT[0];
+	C_BOOL_Arr_To_USINT_1.INPUT[1] = C_USINT_To_BOOL_Arr_1.OUTPUT[1];
+	C_BOOL_Arr_To_USINT_1.INPUT[2] = C_USINT_To_BOOL_Arr_1.OUTPUT[2];
+	C_BOOL_Arr_To_USINT_1.INPUT[3] = C_USINT_To_BOOL_Arr_1.OUTPUT[3];
+	C_BOOL_Arr_To_USINT_1.INPUT[4] = C_USINT_To_BOOL_Arr_1.OUTPUT[4];
+	C_BOOL_Arr_To_USINT_1.INPUT[5] = C_USINT_To_BOOL_Arr_1.OUTPUT[5];
+	C_BOOL_Arr_To_USINT_1.INPUT[6] = C_USINT_To_BOOL_Arr_1.OUTPUT[6];
+	C_BOOL_Arr_To_USINT_1.INPUT[7] = C_USINT_To_BOOL_Arr_1.OUTPUT[7];
+	Convert_BOOL_Array_To_USINT(&C_BOOL_Arr_To_USINT_1);
 	
 	// Compare results.
-	if(C_BYTE_To_M_BITS_1.IN_BYTE == CM_BITS_To_Byte_1.OUT_BYTE){
+	if(C_USINT_To_BOOL_Arr_1.INPUT == C_BOOL_Arr_To_USINT_1.OUTPUT){
 		RES_VAR[2] = 1;
 	}else{
 		RES_VAR[2] = 0;
