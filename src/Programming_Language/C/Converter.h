@@ -49,68 +49,109 @@ Note 3:
         >>	Shift right
 */
 
+/*
+Description:
+    Initialization of constants (macros).
+ */
+#define CONST_BYTE_ONE 0x01
+// Number of bits in byte: 1 BYTE = 8 BIT
+#define CONST_BYTE_EIGHT 0x08
+#define CONST_BYTE_MAX_VALUE 0xff
+
 unsigned char* Convert_Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
 {
     /*
     Description:
-        Conversion of input value (T <data_type>) into a vector of values (BYTES).
+        Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
 
     Args:
-        (1) in_num [T <data_type>]: Input number.
+        (1) in_num [T <data_type>]: A real number greater than or equal to zero.
         (2) out_size [USINT {Byte}]: The size of the output byte array.
-
-                                        Identification number: 
+                                     Identification number: 
                                         out_size = 2 (BYTEs OUT)
                                         out_size = 4 (BYTEs OUT)
 
     Returns:
         (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
-                                    
                                             Note:
-                                                parameter.Length = 2 -> UINT (possible values range from 0 to 65535)
-                                                parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                sizeof(parameter)/sizeof(parameter[0]) = 2 (UINT)
+                                                sizeof(parameter)/sizeof(parameter[0]) = 4 (UDINT)
     */
    
     static unsigned char* out_num_arr;
     out_num_arr = (unsigned char*)malloc(out_size * sizeof(unsigned char));
 
     for(unsigned char i = 0; i < out_size; ++i){
-        out_num_arr[i] = (in_num >> i * 0x08) & 0xff;
+        out_num_arr[i] = (in_num >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE;
     }
-
-    /*
-    static unsigned char out_num_arr[2];
-    out_num_arr[0] = (in_num >> 0x00) & 0xff;
-    out_num_arr[1] = (in_num >> 0x08) & 0xff;
-    */
     return out_num_arr;
 
 }
 
 unsigned short Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
 {
+    /*
+    Description:
+        Conversion of a vector of values (BYTES) to a value (UINT/UDINT).
+        
+    Args:
+        (1) in_byte_arr [USINT {Byte} Array (2, 4)]: Vector of bytes.
+                                                     Note:
+                                                        sizeof(parameter)/sizeof(parameter[0]) = 2 (UINT)
+                                                        sizeof(parameter)/sizeof(parameter[0]) = 4 (UDINT)
+                                                        
+    Returns:
+        (1) parameter [UINT / UDINT]: A real number greater than or equal to zero.  
+     */
+
     unsigned short out_num = 0; size_t n = sizeof(in_byte_arr)/sizeof(in_byte_arr[0]);
     for (unsigned char i = 0; i < n; ++i){
-        out_num |= in_byte_arr[i] << i * 0x08;
+        out_num |= in_byte_arr[i] << i * CONST_BYTE_EIGHT;
     }
 
     return out_num;
 }
 
 bool* Convert_Byte_To_Bit_Array(unsigned short in_byte){
-    static bool out_bit_arr[8];
+    /*
+    Description:
+        Conversion of input value (BYTE) into a vector of logical values (BITS = Booleans).
+        
+        Note:
+            1 BYTE [0 - 255] = 8 BITs [0 - 1]
+    Args:
+        (1) in_byte [USINT {Byte}]: A real number greater than or equal to zero. 
+    
+    Returns:
+        (1) parameter [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE).
+     */
 
-    for(unsigned char i = 0; i < 8; ++i){
-        out_bit_arr[i] = (in_byte >> i * 0x01) & 0x01;
+    static bool out_bit_arr[CONST_BYTE_EIGHT]; size_t n = sizeof(out_bit_arr)/sizeof(out_bit_arr[0]);
+    for(unsigned char i = 0; i < n; ++i){
+        out_bit_arr[i] = (in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE;
     }
  
     return out_bit_arr;
 }
 
 unsigned short Convert_Bit_Array_To_Byte(bool* in_bit_array){
+    /*
+    Description:
+        Conversion of a vector of logical values (BITS = Booleans) to a value (BYTE).
+
+        Note:
+            8 BITs [0 - 1] = 1 BYTE [0 - 255]
+        
+    Args:
+        (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE).
+        
+    Returns:
+        (1) parameter [USINT {Byte}]: A real number greater than or equal to zero. 
+     */
+
     unsigned short out_byte = 0; size_t n = sizeof(in_bit_array)/sizeof(in_bit_array[0]);
     for (unsigned char i = 0; i < n; ++i){
-        out_byte |= in_bit_array[i] << i * 0x01;
+        out_byte |= in_bit_array[i] << i * CONST_BYTE_ONE;
     }
 
     return out_byte;

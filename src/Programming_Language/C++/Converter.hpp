@@ -26,6 +26,15 @@ namespace Converter{
             >>	Shift right
     */
 
+    /*
+    Description:
+        Initialization of constants (macros).
+    */
+    #define CONST_BYTE_ONE 0x01
+    // Number of bits in byte: 1 BYTE = 8 BIT
+    #define CONST_BYTE_EIGHT 0x08
+    #define CONST_BYTE_MAX_VALUE 0xff
+
     template <typename T> std::vector<uint8_t> Number_To_Byte_Array(T in_num, uint8_t out_size)
     {
         /*
@@ -33,28 +42,22 @@ namespace Converter{
             Conversion of input value (T <data_type>) into a vector of values (BYTES).
 
         Args:
-            (1) in_num [T <data_type>]: Input number.
+            (1) in_num [T <data_type>]: A real number greater than or equal to zero.
             (2) out_size [USINT {Byte}]: The size of the output byte array.
-
-                                            Identification number: 
+                                          Identification number: 
                                             out_size = 2 (BYTEs OUT)
                                             out_size = 4 (BYTEs OUT)
-        
-        Fastest Way:
-                out_num_arr.push_back((in_num >> 0x00) & 0xff);
-                out_num_arr.push_back((in_num >> 0x08) & 0xff);
 
         Returns:
-            (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
-                                        
+            (1) parameter [USINT {Byte} Array]: Vector of values (BYTES).                             
                                                 Note:
-                                                    parameter.Length = 2 -> UINT (possible values range from 0 to 65535)
-                                                    parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                    parameter.size() = 2 (UINT) 
+                                                    parameter.size() = 4 (UDINT)
         */
 
         std::vector<uint8_t> out_num_arr;
         for(uint8_t i = 0; i < out_size; ++i){
-            out_num_arr.push_back((in_num >> i * 0x08) & 0xff);
+            out_num_arr.push_back((in_num >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE);
         }
 
         return out_num_arr;
@@ -67,19 +70,18 @@ namespace Converter{
             Conversion of a vector of values (BYTES) to a value (T <data_type>).
 
         Args:
-            (1) in_byte_arr [USINT {Byte} Array]: Input multiple numbers. Possible values range from 0 to 255 in each array index.
-                                            
-                                            Note:
-                                                in_byte_arr.Length = 2 -> UINT (possible values range from 0 to 65535)
-                                                in_byte_arr.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+            (1) in_byte_arr [USINT {Byte} Array]: Vector of values (BYTES). 
+                                                  Note:
+                                                    parameter.size() = 2 (UINT) 
+                                                    parameter.size() = 4 (UDINT)ble values range from 0 to 4294967295)
 
         Returns:
-            (1) parameter [T <data_type>]: Output number.
+            (1) parameter [T <data_type>]: A real number greater than or equal to zero.
         */
 
         T out_num = 0;
         for (auto const& in_byte_arr_i : in_byte_arr | boost::adaptors::indexed(0)){
-            out_num |= in_byte_arr_i.value() << in_byte_arr_i.index() * 0x08;
+            out_num |= in_byte_arr_i.value() << in_byte_arr_i.index() * CONST_BYTE_EIGHT;
         }
 
         return out_num;
@@ -95,15 +97,15 @@ namespace Converter{
                 1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
         Args:
-            (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
+            (1) in_byte [USINT {Byte}]: A real number greater than or equal to zero. 
 
         Returns:
-            (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output multiple bits (1 BYTE).
+            (1) parameter [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE).
         */
 
         std::vector<bool> out_bit_arr;
         for(uint8_t i = 0; i < 8; ++i){
-            out_bit_arr.push_back((in_byte >> i * 0x01) & 0x01);
+            out_bit_arr.push_back((in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE);
         }
     
         return out_bit_arr;
@@ -118,15 +120,15 @@ namespace Converter{
                 8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
         Args:
-            (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input multiple bits (1 BYTE). 
+            (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE). 
 
         Returns:
-            (1) parameter [USINT {Byte}]: Output number (BYTE -> possible values range from 0 to 255).
+            (1) parameter [USINT {Byte}]: A real number greater than or equal to zero. 
         */
 
         uint8_t out_byte = 0;
         for (auto const& in_bit_arr_i : in_bit_array | boost::adaptors::indexed(0)){
-            out_byte |= in_bit_arr_i.value() << in_bit_arr_i.index() * 0x01;
+            out_byte |= in_bit_arr_i.value() << in_bit_arr_i.index() * CONST_BYTE_ONE;
         }
 
         return out_byte;

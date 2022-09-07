@@ -34,8 +34,8 @@ import Converter
 def main():
     """
     Description:
-       Simple tests to verify the functionality of individual functions to convert 
-       data from your own library.
+        Simple tests to verify the functionality of individual functions to convert 
+        data from the custom library.
     """
 
     # 1\ Test No. 1: UINT <-> BYTE[]

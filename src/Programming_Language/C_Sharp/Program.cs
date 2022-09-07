@@ -36,10 +36,10 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             /*
-                Description:
-                   Simple tests to verify the functionality of individual functions to convert 
-                   data from your own library.
-             */
+            Description:
+                Simple tests to verify the functionality of individual functions to convert 
+                data from the custom library.
+            */
 
             // 1\ Test No. 1: UINT <-> BYTE[]
             ushort input_var_1 = 12345;

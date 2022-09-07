@@ -33,18 +33,25 @@
 
 /**
 Description:
-	 Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
-	 byte to an array of bits, and an array of bits to byte.
-	
-	 Note 1: 
-	     A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+    Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+    byte to an array of bits, and an array of bits to byte.
 
-	 Note 2:
-		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
-        USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
-        UINT        : Unsigned INT          [0, 65535]      | 16-bit
-        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
- */
+Note 1: 
+    A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+
+Note 2:
+    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+    USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+    UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
+
+Note 3:
+    Bitwise Operators:
+        &	Bitwise AND
+        |	Bitwise OR
+        <<	Shift left
+        >>	Shift right
+*/
 
 typedef struct Convert_USINT_Array_To_INT
 {
@@ -165,6 +172,7 @@ typedef struct Convert_USINT_To_BOOL_Array
  	 */
 	BOOL OUTPUT[8];
 } Convert_USINT_To_BOOL_Array_typ;
+
 /**
  * Declaration of function blocks for conversion between different types.
  */
@@ -181,10 +189,10 @@ void Convert_USINT_Array_To_INT(struct Convert_USINT_Array_To_INT* inst){
 		Conversion of a vector of values (BYTES) to a value (INT).
 
 	Args:
-		(1) INPUT[0 .. 1] [BYTE (USINT) ARRAY]: Input multiple bytes.
+		(1) INPUT[0 .. 1] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 		
 	Returns:
-		(1) OUTPUT [INT]: Output integer (2 BYTEs).
+		(1) OUTPUT [INT]: A real number (positive, negative).
 	
 	Example:
 	     // Read inputs
@@ -205,10 +213,10 @@ void Convert_USINT_Array_To_REAL(struct Convert_USINT_Array_To_REAL* inst){
 		Conversion of a vector of values (BYTES) to a value (REAL - Float).
 
 	Args:
-		(1) INPUT[0 .. 3] [BYTE (USINT) ARRAY]: Input multiple bytes.
+		(1) INPUT[0 .. 3] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 		
 	Returns:
-		(1) OUTPUT [REAL]: Output real (4 BYTEs).
+		(1) OUTPUT [REAL]: A rational number (positive, negative).
 	
 	Example:
 	     // Read inputs
@@ -230,10 +238,10 @@ void Convert_INT_To_USINT_Array(struct Convert_INT_To_USINT_Array* inst){
 		Conversion of input value (INT) into a vector of values (BYTES).
 
 	Args:
-		(1) INPUT [INT]: Input integer (2 BYTEs).
+		(1) INPUT [INT]: A real number (positive, negative).
 		
 	Returns:
-		(1) OUTPUT[0 .. 1] [BYTE (USINT) ARRAY]: Output multiple bytes.
+		(1) OUTPUT[0 .. 1] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 	
 	Example:
 	     // Read inputs
@@ -257,10 +265,10 @@ void Convert_REAL_To_USINT_Array(struct Convert_REAL_To_USINT_Array* inst){
 		Conversion of input value (REAL - Float) into a vector of values (BYTES).
 
 	Args:
-		(1) INPUT [REAL]: Input real (4 BYTEs).
+		(1) INPUT [REAL]: A rational number (positive, negative).
 		
 	Returns:
-		(1) OUTPUT[0 .. 3] [BYTE (USINT) ARRAY]: Output multiple bytes.
+		(1) OUTPUT[0 .. 3] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 	
 	Example:
 	     // Read inputs
@@ -288,10 +296,10 @@ void Convert_BOOL_Array_To_USINT(struct Convert_BOOL_Array_To_USINT* inst){
 			1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
 	Args:
-		(1) INPUT[0 .. 7] [BIT (BOOL) ARRAY]: Input multiple bits (1 BYTE).
+		(1) INPUT[0 .. 7] [BIT (BOOL) ARRAY]: Vector of bits (1 BYTE). 
 		
 	Returns:
-		(1) OUTPUT [BYTE (USINT)]: Output byte.
+		(1) OUTPUT [BYTE (USINT)]: A real number greater than or equal to zero.
 	
 	Example:
 	     // Read inputs
@@ -323,10 +331,10 @@ void Convert_USINT_To_BOOL_Array(struct Convert_USINT_To_BOOL_Array* inst){
 			8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
 	Args:
-		(1) INPUT [BYTE]: Input byte.
+		(1) INPUT [BYTE]: A real number greater than or equal to zero.
 		
 	Returns:
-		(1) OUTPUT[0 .. 7] [BIT (BOOL) ARRAY]: Output multiple bits (1 BYTE).
+		(1) OUTPUT[0 .. 7] [BIT (BOOL) ARRAY]: Vector of bits (1 BYTE). 
 	
 	Example:
 	     // Read inputs
@@ -348,5 +356,7 @@ void Convert_USINT_To_BOOL_Array(struct Convert_USINT_To_BOOL_Array* inst){
 	inst->OUTPUT[6] = (inst->INPUT >> 0x06) & 0x01;
 	inst->OUTPUT[7] = (inst->INPUT >> 0x07) & 0x01;
 }
+
+#endif
 
 #endif

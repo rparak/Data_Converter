@@ -50,7 +50,7 @@ MODULE Module1
     PROC Main()
         !   Description:                                                                    !
         !       Simple tests to verify the functionality of individual functions to convert !
-        !       data from your own library.                                                 !
+        !       data from the custom library.                                               !
         
         ! 1\ Test No. 1: UINT <-> BYTE[]
         !   Converting uint (16-bit -> 2-byte) to multiple bytes.
@@ -98,43 +98,43 @@ MODULE Module1
         ENDIF
     ENDPROC
 
-    ! Description:                                                              !
-    !   Library to converts base data types to an array of bytes, and an array  !
-    !   of bytes to base data types as well as byte to an array of bits, and an !
-    !   array of bits to byte.                                                  !
-    !                                                                           !
-    !	 Note 1:                                                                !
-    !	     A byte is a unit of storage in a computer which contains 8-bits    !
-    !        and can store 256 different values: 0 to 255.                      !
-    !                                                                           !
-    !	 Note 2:                                                                !
-    !		BOOL (Bit)   : Boolean               [0, 1]          | 1-bit        !
-    !        USINT (Byte): Unsigned char         [0, 255]        | 8-bit        !
-    !        UINT        : Unsigned INT          [0, 65535]      | 16-bit       !
-    !        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit       !
-    !                                                                           !
-    !   Note 3:                                                                 !
-    !       Function BitOr(byte, byte), BitOrDnum(dnum, dnum):                  !
-    !           Logical bitwise OR {Symbol - |}.                                !
-    !                                                                           !
-    !       Function BitAnd(byte, byte), BitAndDnum(dnum, dnum):                !
-    !           Logical bitwise AND {Symbol - &}.                               !
-    !                                                                           !
-    !       Function BitLSh(byte, num), BitLShDnum(dnum, num):                  !
-    !           Logical bitwise LEFT SHIFT {Symbol - <<}.                       !
-    !                                                                           !
-    !       Function BitRSh(byte, num), BitRShDnum(dnum, num):                  !
-    !           Logical bitwise RIGHT SHIFT {Symbol - >>}.                      !
+    ! Description:                                                                   !
+    !   Library to converts base data types to an array of bytes, and an array       !
+    !   of bytes to base data types as well as byte to an array of bits, and an      !
+    !   array of bits to byte.                                                       !
+    !                                                                                !
+    !	 Note 1:                                                                     !
+    !	     A byte is a unit of storage in a computer which contains 8-bits         !
+    !        and can store 256 different values: 0 to 255.                           !
+    !                                                                                !
+    !	 Note 2:                                                                     !
+    !        BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte | !
+    !        USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte | !
+    !        UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte | !
+    !        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte | !
+    !                                                                                !
+    !   Note 3:                                                                      !
+    !       Function BitOr(byte, byte), BitOrDnum(dnum, dnum):                       !
+    !           Logical bitwise OR {Symbol - |}.                                     !
+    !                                                                                !
+    !       Function BitAnd(byte, byte), BitAndDnum(dnum, dnum):                     !
+    !           Logical bitwise AND {Symbol - &}.                                    !
+    !                                                                                !
+    !       Function BitLSh(byte, num), BitLShDnum(dnum, num):                       !
+    !           Logical bitwise LEFT SHIFT {Symbol - <<}.                            !
+    !                                                                                !
+    !       Function BitRSh(byte, num), BitRShDnum(dnum, num):                       !  
+    !           Logical bitwise RIGHT SHIFT {Symbol - >>}.                           !
 
     PROC Convert_UINT_To_USINT_Array(dnum INPUT, INOUT num OUTPUT{*})
         ! Description:                                                                 !
         !   Conversion of input value (UINT - 16-bit) into a vector of values (BYTES). !
         !                                                                              !
         ! Args:                                                                        !
-        !   [1] INPUT [dnum]: Input uint (2 BYTEs).                                    !         
+        !   [1] INPUT [dnum]: A real number greater than or equal to zero.             !         
         !                                                                              !
         ! Returns:                                                                     !
-        !   [1] OUTPUT [num array{2}]: Output multiple bytes.                          !
+        !   [1] OUTPUT [num array{2}]: Vector of values (BYTES).                       !
         !                                                                              !
         ! EXAMPLE:                                                                     !
         !   Read Inputs:                                                               !
@@ -153,10 +153,10 @@ MODULE Module1
         !   Conversion of a vector of values (BYTES) to a value (UINT - 16-bit). !
         !                                                                        !
         ! Args:                                                                  !
-        !   [1] INPUT [dnum array{2}]: Input multiple bytes.                     !
+        !   [1] INPUT [dnum array{2}]: Vector of values (BYTES).                 !
         !                                                                        !
         ! Returns:                                                               !
-        !   [1] OUTPUT [num]: Output uint (2 BYTEs).                             !
+        !   [1] OUTPUT [num]: A real number greater than or equal to zero.       !
         !                                                                        !
         ! EXAMPLE:                                                               !
         !   Read Inputs:                                                         !
@@ -174,10 +174,10 @@ MODULE Module1
         !   Conversion of input value (UDINT - 32-bit) into a vector of values (BYTES). !
         !                                                                               !
         ! Args:                                                                         !
-        ! [1] INPUT [num]: Input uint (4 BYTEs).                                        !
+        ! [1] INPUT [num]: A real number greater than or equal to zero.                 !
         !                                                                               !
         ! Returns:                                                                      !
-        ! [1] OUTPUT [num array{4}]: Output multiple bytes.                             ! 
+        ! [1] OUTPUT [num array{4}]: Vector of values (BYTES).                          ! 
         !                                                                               !
         ! EXAMPLE:                                                                      !
         !   Read Inputs:                                                                !
@@ -198,10 +198,10 @@ MODULE Module1
         !   Conversion of a vector of values (BYTES) to a value (UDINT - 32-bit). !
         !                                                                         !
         ! Args:                                                                   !
-        ! [1] INPUT [num array{4}]: Input multiple bytes.                         !   
+        ! [1] INPUT [num array{4}]: Vector of values (BYTES).                     !   
         !                                                                         !
         ! Returns:                                                                !
-        ! [1] OUTPUT [num]: Output udint (4 BYTEs).                               !
+        ! [1] OUTPUT [num]: A real number greater than or equal to zero.          !
         !                                                                         !
         ! EXAMPLE:                                                                !
         !   Read Inputs:                                                          !
@@ -224,10 +224,10 @@ MODULE Module1
         !       1 BYTE [0 - 255] = 8 BITs [0 - 1]                                               !
         !                                                                                       !
         ! Args:                                                                                 !
-        ! [1] INPUT [num array{8}]: Input multiple bits (1 BYTE).                               !
+        ! [1] INPUT [num array{8}]: Vector of bits (1 BYTE)                                     !
         !                                                                                       !
         ! Returns:                                                                              !
-        ! [1] OUTPUT [num]: Output byte.                                                        !
+        ! [1] OUTPUT [num]: A real number greater than or equal to zero.                        !
         !                                                                                       !
         ! EXAMPLE:                                                                              !
         !   Read Inputs:                                                                        !
@@ -254,10 +254,10 @@ MODULE Module1
         !       8 BITs [0 - 1] = 1 BYTE [0 - 255]                                         !
         !                                                                                 !
         ! Args:                                                                           !
-        ! [1] INPUT [num]: Input byte.                                                    !
+        ! [1] INPUT [num]: A real number greater than or equal to zero.                   !
         !                                                                                 !
         ! Returns:                                                                        !
-        ! [1] OUTPUT [num array{8}]: Output multiple bits (1 BYTE).                       !
+        ! [1] OUTPUT [num array{8}]: Vector of bits (1 BYTE)                              !
         !                                                                                 !
         ! EXAMPLE:                                                                        !
         !   Read Inputs:                                                                  !

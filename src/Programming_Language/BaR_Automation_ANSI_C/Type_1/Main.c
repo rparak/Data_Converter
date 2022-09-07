@@ -69,6 +69,12 @@ void _INIT ProgramInit(void)
 void _CYCLIC ProgramCyclic(void)
 {
 	/**
+	 Description:
+	    Simple tests to verify the functionality of individual functions to convert 
+        data from the custom library.
+	*/
+
+	/**
 	* 1\ Test No. 1: UINT <-> USINT[]
 	*/
 	// Converting uint (16-bit -> 2-byte) to multiple bytes.

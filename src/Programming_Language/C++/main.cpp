@@ -1,9 +1,20 @@
+// Custom Lib.:
+//   Base conversion between data.
 #include "Converter.hpp"
+
+/*
+ Note:
+   $ g++ -std=c++17 main.cpp -o main
+   $ ./main
+ */
 
 int main()
 {
-    // g++ -std=c++17 main.cpp -o main
-    // ./main
+    /*
+	 Description:
+	    Simple tests to verify the functionality of individual functions to convert 
+        data from the custom library.
+	*/
 
     ushort input_var_1 = 12345;
 

@@ -33,18 +33,25 @@
 
 /**
 Description:
-	 Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
-	 byte to an array of bits, and an array of bits to byte.
-	
-	 Note 1: 
-	     A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+    Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+    byte to an array of bits, and an array of bits to byte.
 
-	 Note 2:
-		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
-        USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
-        UINT        : Unsigned INT          [0, 65535]      | 16-bit
-        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
- */
+Note 1: 
+    A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+
+Note 2:
+    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+    USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+    UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
+
+Note 3:
+    Bitwise Operators:
+        &	Bitwise AND
+        |	Bitwise OR
+        <<	Shift left
+        >>	Shift right
+*/
 
 typedef struct Convert_USINT_Array_To_UINT
 {
@@ -182,10 +189,10 @@ void Convert_USINT_Array_To_UINT(struct Convert_USINT_Array_To_UINT* inst){
 		Conversion of a vector of values (BYTES) to a value (UINT - 16-bit).
 
 	Args:
-		(1) INPUT[0 .. 1] [BYTE (USINT) ARRAY]: Input multiple bytes.
+		(1) INPUT[0 .. 1] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 		
 	Returns:
-		(1) OUTPUT [UINT]: Output uint (2 BYTEs).
+		(1) OUTPUT [UINT]: A real number greater than or equal to zero.
 	
 	Example:
 	     // Read inputs
@@ -207,10 +214,10 @@ void Convert_USINT_Array_To_UDINT(struct Convert_USINT_Array_To_UDINT* inst){
 		Conversion of a vector of values (BYTES) to a value (UDINT - 32-bit).
 
 	Args:
-		(1) INPUT[0 .. 3] [BYTE (USINT) ARRAY]: Input multiple bytes.
+		(1) INPUT[0 .. 3] [BYTE (USINT) ARRAY]: Vector of values (BYTES).
 		
 	Returns:
-		(1) OUTPUT [UDINT]: Output udint (4 BYTEs).
+		(1) OUTPUT [UDINT]: A real number greater than or equal to zero.
 	
 	Example:
 	     // Read inputs
@@ -235,10 +242,10 @@ void Convert_UINT_To_USINT_Array(struct Convert_UINT_To_USINT_Array* inst){
 		Conversion of input value (UINT - 16-bit) into a vector of values (BYTES).
 
 	Args:
-		(1) INPUT[UINT]: Input uint (2 BYTEs).
+		(1) INPUT[UINT]: A real number greater than or equal to zero.
 		
 	Returns:
-		(1) OUTPUT[0 .. 1] [BYTE (USINT) ARRAY]: Output multiple bytes.
+		(1) OUTPUT[0 .. 1] [BYTE (USINT) ARRAY]: Vector of values (BYTES). 
 	
 	Example:
 	     // Read inputs
@@ -260,10 +267,10 @@ void Convert_UDINT_To_USINT_Array(struct Convert_UDINT_To_USINT_Array* inst){
 		Conversion of input value (UDINT - 32-bit) into a vector of values (BYTES).
 
 	Args:
-		(1) INPUT [UDINT]: Input udint (4 BYTEs).
+		(1) INPUT [UDINT]: A real number greater than or equal to zero.
 		
 	Returns:
-		(1) OUTPUT[0 .. 3] [BYTE (USINT) ARRAY]: Output multiple bytes.
+		(1) OUTPUT[0 .. 3] [BYTE (USINT) ARRAY]: Vector of values (BYTES). 
 	
 	Example:
 	     // Read inputs
@@ -291,10 +298,10 @@ void Convert_BOOL_Array_To_USINT(struct Convert_BOOL_Array_To_USINT* inst){
 			1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
 	Args:
-		(1) INPUT[0 .. 7] [BIT (BOOL) ARRAY]: Input multiple bits (1 BYTE).
+		(1) INPUT[0 .. 7] [BIT (BOOL) ARRAY]: Vector of bits (1 BYTE). 
 		
 	Returns:
-		(1) OUTPUT [BYTE (USINT)]: Output byte.
+		(1) OUTPUT [BYTE (USINT)]: A real number greater than or equal to zero.
 	
 	Example:
 	     // Read inputs
@@ -326,10 +333,10 @@ void Convert_USINT_To_BOOL_Array(struct Convert_USINT_To_BOOL_Array* inst){
 			8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
 	Args:
-		(1) INPUT [BYTE]: Input byte.
+		(1) INPUT [BYTE]: A real number greater than or equal to zero.
 		
 	Returns:
-		(1) OUTPUT[0 .. 7] [BIT (BOOL) ARRAY]: Output multiple bits (1 BYTE).
+		(1) OUTPUT[0 .. 7] [BIT (BOOL) ARRAY]: Vector of bits (1 BYTE). 
 	
 	Example:
 	     // Read inputs

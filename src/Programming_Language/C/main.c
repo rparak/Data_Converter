@@ -1,9 +1,20 @@
+// Custom Lib.:
+//   Base conversion between data.
 #include "Converter.h"
 
-// g++ main.c -o main
-// ./main
+/*
+ Note:
+   $ g++ main.c -o main
+   $ ./main
+ */
 
 int main() {
+   /*
+	 Description:
+	    Simple tests to verify the functionality of individual functions to convert 
+        data from the custom library.
+	*/
+
    unsigned short input_var_1 = 12345;
    unsigned char* out_num_arr;
    /*
