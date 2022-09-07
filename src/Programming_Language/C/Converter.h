@@ -27,8 +27,50 @@ File Name: Converter.h
 #include <stdbool.h>
 #include <cstdlib>
 
+/*
+Description:
+    Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as 
+    byte to an array of bits, and an array of bits to byte.
+
+Note 1: 
+    A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
+
+Note 2:
+    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
+    USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
+    UINT        : Unsigned INT          [0, 65535]      | 16-bit
+    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+
+Note 3:
+    Bitwise Operators:
+        &	Bitwise AND
+        |	Bitwise OR
+        <<	Shift left
+        >>	Shift right
+*/
+
 unsigned char* Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
 {
+    /*
+    Description:
+        Conversion of input value (T <data_type>) into a vector of values (BYTES).
+
+    Args:
+        (1) in_num [T <data_type>]: Input number.
+        (2) out_size [USINT {Byte}]: The size of the output byte array.
+
+                                        Identification number: 
+                                        out_size = 2 (BYTEs OUT)
+                                        out_size = 4 (BYTEs OUT)
+
+    Returns:
+        (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
+                                    
+                                            Note:
+                                                parameter.Length = 2 -> UINT (possible values range from 0 to 65535)
+                                                parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+    */
+   
     static unsigned char* out_num_arr;
     out_num_arr = (unsigned char*)malloc(out_size * sizeof(unsigned char));
 
