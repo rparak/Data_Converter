@@ -57,15 +57,17 @@ Description:
 // Number of bits in byte: 1 BYTE = 8 BIT
 #define CONST_BYTE_EIGHT 0x08
 #define CONST_BYTE_MAX_VALUE 0xff
+// Helpers (Functions).
+#define Arr_Length(x) (sizeof(x) / sizeof((x)[0]))
 
-unsigned char* Convert_Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
+unsigned char* Convert_Number_To_Byte_Array(unsigned int in_num, unsigned char out_size)
 {
     /*
     Description:
         Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
 
     Args:
-        (1) in_num [T <data_type>]: A real number greater than or equal to zero.
+        (1) in_num [UINT]: A real number greater than or equal to zero.
         (2) out_size [USINT {Byte}]: The size of the output byte array.
                                      Identification number: 
                                         out_size = 2 (BYTEs OUT)
@@ -78,17 +80,15 @@ unsigned char* Convert_Number_To_Byte_Array(unsigned short in_num, unsigned char
                                                 sizeof(parameter)/sizeof(parameter[0]) = 4 (UDINT)
     */
    
-    static unsigned char* out_num_arr;
-    out_num_arr = (unsigned char*)malloc(out_size * sizeof(unsigned char));
-
+    static unsigned char* out_num_arr = (unsigned char*)malloc(sizeof(unsigned char) * out_size);
     for(unsigned char i = 0; i < out_size; ++i){
         out_num_arr[i] = (in_num >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE;
     }
-    return out_num_arr;
 
+    return out_num_arr;
 }
 
-unsigned short Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
+unsigned int Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
 {
     /*
     Description:
@@ -101,11 +101,11 @@ unsigned short Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
                                                         sizeof(parameter)/sizeof(parameter[0]) = 4 (UDINT)
                                                         
     Returns:
-        (1) parameter [UINT / UDINT]: A real number greater than or equal to zero.  
+        (1) parameter [UINT]: A real number greater than or equal to zero.  
      */
 
-    unsigned short out_num = 0; size_t n = sizeof(in_byte_arr)/sizeof(in_byte_arr[0]);
-    for (unsigned char i = 0; i < n; ++i){
+    unsigned int out_num = 0;
+    for (unsigned char i = 0; i < Arr_Length(in_byte_arr); ++i){
         out_num |= in_byte_arr[i] << i * CONST_BYTE_EIGHT;
     }
 
@@ -126,8 +126,8 @@ bool* Convert_Byte_To_Bit_Array(unsigned short in_byte){
         (1) parameter [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE).
      */
 
-    static bool out_bit_arr[CONST_BYTE_EIGHT]; size_t n = sizeof(out_bit_arr)/sizeof(out_bit_arr[0]);
-    for(unsigned char i = 0; i < n; ++i){
+    static bool out_bit_arr[CONST_BYTE_EIGHT];
+    for(unsigned char i = 0; i < Arr_Length(out_bit_arr); ++i){
         out_bit_arr[i] = (in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE;
     }
  
@@ -149,8 +149,8 @@ unsigned short Convert_Bit_Array_To_Byte(bool* in_bit_array){
         (1) parameter [USINT {Byte}]: A real number greater than or equal to zero. 
      */
 
-    unsigned short out_byte = 0; size_t n = sizeof(in_bit_array)/sizeof(in_bit_array[0]);
-    for (unsigned char i = 0; i < n; ++i){
+    unsigned short out_byte = 0;
+    for (unsigned char i = 0; i < Arr_Length(in_bit_array); ++i){
         out_byte |= in_bit_array[i] << i * CONST_BYTE_ONE;
     }
 

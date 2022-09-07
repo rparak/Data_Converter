@@ -69,11 +69,11 @@ namespace ConsoleApp1
             // 2\ Test No. 2: UDINT <-> BYTE[]
             uint input_var_2 = 12345678;
 
-            // Converting uint (16-bit -> 2-byte) to multiple bytes.
+            // Converting udint (32-bit -> 4-byte) to multiple bytes.
             byte[] res_tId_2 = Convert.NumberToByteArray<uint>(input_var_2);
 
             // Check result:
-            // Converting multiple bytes to an uint (16-bit -> 2-byte).
+            // Converting multiple bytes to an udint (32-bit -> 4-byte).
             uint check_res_tId_2 = Convert.ByteArrayToNumber<uint>(res_tId_2);
 
             // Compare results.
