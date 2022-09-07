@@ -49,15 +49,16 @@ Note 3:
         >>	Shift right
 */
 
+
 /*
 Description:
-    Initialization of constants (macros).
- */
-#define CONST_BYTE_ONE 0x01
+    Initialization of constants.
+*/
+const unsigned char CONST_BYTE_ONE = 0x01;
 // Number of bits in byte: 1 BYTE = 8 BIT
-#define CONST_BYTE_EIGHT 0x08
-#define CONST_BYTE_MAX_VALUE 0xff
-// Helpers (Functions).
+const unsigned char CONST_BYTE_EIGHT = 0x08;
+const unsigned char CONST_BYTE_MAX_VALUE = 0xff;
+// Macro (Utilities).
 #define Arr_Length(x) (sizeof(x) / sizeof((x)[0]))
 
 unsigned char* Convert_Number_To_Byte_Array(unsigned int in_num, unsigned char out_size)

@@ -28,12 +28,12 @@ namespace Converter{
 
     /*
     Description:
-        Initialization of constants (macros).
+        Initialization of constants.
     */
-    #define CONST_BYTE_ONE 0x01
+    const uint8_t CONST_BYTE_ONE = 0x01;
     // Number of bits in byte: 1 BYTE = 8 BIT
-    #define CONST_BYTE_EIGHT 0x08
-    #define CONST_BYTE_MAX_VALUE 0xff
+    const uint8_t CONST_BYTE_EIGHT = 0x08;
+    const uint8_t CONST_BYTE_MAX_VALUE = 0xff;
 
     template <typename T> std::vector<uint8_t> Number_To_Byte_Array(T in_num, uint8_t out_size)
     {
