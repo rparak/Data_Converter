@@ -49,7 +49,7 @@ Note 3:
         >>	Shift right
 */
 
-unsigned char* Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
+unsigned char* Convert_Number_To_Byte_Array(unsigned short in_num, unsigned char out_size)
 {
     /*
     Description:
@@ -87,7 +87,7 @@ unsigned char* Number_To_Byte_Array(unsigned short in_num, unsigned char out_siz
 
 }
 
-unsigned short Byte_Array_To_Number(unsigned char* in_byte_arr)
+unsigned short Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
 {
     unsigned short out_num = 0; size_t n = sizeof(in_byte_arr)/sizeof(in_byte_arr[0]);
     for (unsigned char i = 0; i < n; ++i){
@@ -97,7 +97,7 @@ unsigned short Byte_Array_To_Number(unsigned char* in_byte_arr)
     return out_num;
 }
 
-bool* Byte_To_Bit_Array(unsigned short in_byte){
+bool* Convert_Byte_To_Bit_Array(unsigned short in_byte){
     static bool out_bit_arr[8];
 
     for(unsigned char i = 0; i < 8; ++i){
@@ -107,7 +107,7 @@ bool* Byte_To_Bit_Array(unsigned short in_byte){
     return out_bit_arr;
 }
 
-unsigned short Bit_Array_To_Byte(bool* in_bit_array){
+unsigned short Convert_Bit_Array_To_Byte(bool* in_bit_array){
     unsigned short out_byte = 0; size_t n = sizeof(in_bit_array)/sizeof(in_bit_array[0]);
     for (unsigned char i = 0; i < n; ++i){
         out_byte |= in_bit_array[i] << i * 0x01;
