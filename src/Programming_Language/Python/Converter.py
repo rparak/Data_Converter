@@ -49,10 +49,22 @@ Description:
             <<	Shift left
             >>	Shift right
 """
-CONST_ZERO = 0x00
+
+"""
+Description:
+    Initialization of constants.
+"""
+CONST_BYTE_ZERO = 0x00
+CONST_BYTE_ONE  = 0x01
+# Number of bits in byte: 1 BYTE = 8 BIT
+CONST_BYTE_EIGHT = 0x08
+# Upper limit of required data types.
 CONST_USINT_UPPER_LIMIT = np.iinfo(np.uint8).max
-CONST_UINT_UPPER_LIMIT  = np.iinfo(np.uint16).max 
+CONST_UINT_UPPER_LIMIT  = np.iinfo(np.uint16).max
 CONST_UDINT_UPPER_LIMIT = np.iinfo(np.uint32).max 
+# The size of the required data types in number of bytes.
+CONST_UINT_SIZE  = 2
+CONST_UDINT_SIZE = 4
 
 def Convert_Number_To_Byte_Array(in_num, out_size):
     """
@@ -76,16 +88,14 @@ def Convert_Number_To_Byte_Array(in_num, out_size):
     """
  
     try:
-        assert ((out_size == 2 and (0x00 <= in_num <= CONST_UINT_UPPER_LIMIT)) or \
-                (out_size == 4 and (0x00 <= in_num <= CONST_UDINT_UPPER_LIMIT)))
+        assert ((out_size == CONST_UINT_SIZE and (CONST_BYTE_ZERO <= in_num <= CONST_UINT_UPPER_LIMIT)) or \
+                (out_size == CONST_UDINT_SIZE and (CONST_BYTE_ZERO <= in_num <= CONST_UDINT_UPPER_LIMIT)))
         
         out_num_arr = np.empty(out_size, dtype=np.uint8)
         for i in range(out_size):
-            out_num_arr[i] = (in_num >> i * 0x08) & 0xff
+            out_num_arr[i] = (in_num >> i * CONST_BYTE_EIGHT) & CONST_USINT_UPPER_LIMIT
             
         return out_num_arr
-
-        #return np.array([(in_num >> i * 0x08) & 0xff for i in range(type_id)], dtype=np.uint8)
 
     except AssertionError as error:
         print('[ERROR] Invalid input. Please try again ...')
@@ -108,11 +118,11 @@ def Convert_Byte_Array_To_Number(in_byte_arr):
     """
         
     try: 
-        assert in_byte_arr.size == 2 or in_byte_arr.size == 4
+        assert in_byte_arr.size == CONST_UINT_SIZE or in_byte_arr.size == CONST_UDINT_SIZE
 
         out_num = 0
         for i, in_byte_arr_i in enumerate(in_byte_arr):
-            out_num |= in_byte_arr_i << i * 0x08
+            out_num |= in_byte_arr_i << i * CONST_BYTE_EIGHT
             
         return out_num
 
@@ -135,11 +145,11 @@ def Convert_Byte_To_Bit_Array(in_byte):
     """
         
     try: 
-        assert CONST_ZERO <= in_byte <= CONST_USINT_UPPER_LIMIT
+        assert CONST_BYTE_ZERO <= in_byte <= CONST_USINT_UPPER_LIMIT
 
-        out_bit_arr = np.empty(8, dtype=np.bool_)
-        for i in range(8):
-            out_bit_arr[i] = (in_byte >> i * 0x01) & 0x01 
+        out_bit_arr = np.empty(CONST_BYTE_EIGHT, dtype=np.bool_)
+        for i in range(out_bit_arr.size):
+            out_bit_arr[i] = (in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE 
 
         return out_bit_arr
 
@@ -163,11 +173,11 @@ def Convert_Bit_Array_To_BYTE(in_bit_arr):
     """
 
     try: 
-        assert in_bit_arr.size == 0x08
+        assert in_bit_arr.size == CONST_BYTE_EIGHT
 
         out_byte = 0
         for i, in_bit_arr_i in enumerate(in_bit_arr):
-            out_byte |= in_bit_arr_i << i * 0x01
+            out_byte |= in_bit_arr_i << i * CONST_BYTE_ONE
 
         return out_byte
 

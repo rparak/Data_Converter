@@ -54,6 +54,16 @@ namespace DataConverter
 
     public static class Core
     {
+        /*
+        Description:
+            Initialization of constants.
+         */
+        const byte CONST_BYTE_ZERO = 0x00;
+        const byte CONST_BYTE_ONE = 0x01;
+        // Number of bits in byte: 1 BYTE = 8 BIT
+        const byte CONST_BYTE_EIGHT = 0x08;
+        const byte CONST_BYTE_MAX_VALUE = byte.MaxValue;
+
         public static byte[] NumberToByteArray<T>(T in_num, byte out_size)
         {
             /*
@@ -81,7 +91,7 @@ namespace DataConverter
             byte[] out_num_arr = new byte[out_size];
             for (byte i = 0; i < out_size; ++i)
             {
-                out_num_arr[i] = (byte)((in_num_dynamic >> i * 0x08) & 0xff);
+                out_num_arr[i] = (byte)((in_num_dynamic >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE);
             }
 
             return out_num_arr;
@@ -104,13 +114,13 @@ namespace DataConverter
                 (1) parameter [T <data_type>]: Output number.
              */
 
-            dynamic out_num_dynamic = (T)Convert.ChangeType(0 | in_byte_arr[0] << 0 * 0x08, typeof(T));
+            dynamic out_num_dynamic = (T)Convert.ChangeType(CONST_BYTE_ZERO | in_byte_arr[0] << CONST_BYTE_ZERO, typeof(T));
 
             // Start from index 1, as the first index is already calculated.
             //  Note: arr.Skip(1)
             foreach (var (in_byte_arr_i, i) in in_byte_arr.Skip(1).Select((in_byte_arr_i, i) => (in_byte_arr_i, i)))
             {
-                out_num_dynamic |= (T)Convert.ChangeType(in_byte_arr_i << (i + 0x01) * 0x08, typeof(T));
+                out_num_dynamic |= (T)Convert.ChangeType(in_byte_arr_i << (i + CONST_BYTE_ONE) * CONST_BYTE_EIGHT, typeof(T));
             }
 
             return (T)out_num_dynamic;
@@ -132,10 +142,10 @@ namespace DataConverter
                 (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output multiple bits (1 BYTE).
              */
 
-            bool[] out_bit_arr = new bool[CONST_NUM_OF_BIT_IN_BYTE];
+            bool[] out_bit_arr = new bool[CONST_BYTE_EIGHT];
             for (byte i = 0; i < out_bit_arr.Length; ++i)
             {
-                out_bit_arr[i] = (1 == ((in_byte >> i * 0x01) & 0x01));
+                out_bit_arr[i] = (1 == ((in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE));
             }
 
             return out_bit_arr;
@@ -160,7 +170,7 @@ namespace DataConverter
             byte out_byte = 0;
             foreach (var (in_bit_arr_i, i) in in_bit_arr.Select((in_bit_arr_i, i) => (in_bit_arr_i, i)))
             {
-                out_byte |= (in_bit_arr_i == true ? (byte)(1 << i * 0x01) : out_byte);
+                out_byte |= (in_bit_arr_i == true ? (byte)(CONST_BYTE_ONE << i * CONST_BYTE_ONE) : out_byte);
             }
 
             return out_byte;
