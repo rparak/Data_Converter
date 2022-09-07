@@ -36,10 +36,10 @@ Note 1:
     A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
 
 Note 2:
-    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
-    USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
-    UINT        : Unsigned INT          [0, 65535]      | 16-bit
-    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+    USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+    UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
 
 Note 3:
     Bitwise Operators:

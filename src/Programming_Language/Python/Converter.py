@@ -37,10 +37,10 @@ Description:
         A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
         
     Note 2:
-		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
-        USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
-        UINT        : Unsigned INT          [0, 65535]      | 16-bit
-        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+        USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+        UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
 
     Note 3:
         Bitwise Operators:
@@ -72,19 +72,17 @@ def Convert_Number_To_Byte_Array(in_num, out_size):
         Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
         
     Args:
-        (1) in_num [UINT / UDINT]: Input number (2 -> possible values range from 0 to 65535 / 4 BYTEs -> possible values range from 0 to 4294967295).
+        (1) in_num [UINT / UDINT]: A real number greater than or equal to zero.
         (2) out_size [USINT {Byte}]: The size of the output byte array.
-
                                      Identification number: 
                                         out_size = 2 (BYTEs OUT)
                                         out_size = 4 (BYTEs OUT)
         
     Returns:
-        (1) parameter [USINT {Byte} Array (2, 4)]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
-                                                   
+        (1) parameter [USINT {Byte} Array (2, 4)]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.                                         
                                                    Note:
-                                                        parameter.siez = 2 -> UINT (possible values range from 0 to 65535)
-                                                        parameter.size = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                        parameter.size = 2 (UINT) 
+                                                        parameter.size = 4 (UDINT)
     """
  
     try:
@@ -107,14 +105,13 @@ def Convert_Byte_Array_To_Number(in_byte_arr):
         Conversion of a vector of values (BYTES) to a value (UINT/UDINT).
         
     Args:
-        (1) in_byte_arr [USINT {Byte} Array (2, 4)]: Input multiple numbers. Possible values range from 0 to 255 in each array index.
-
+        (1) in_byte_arr [USINT {Byte} Array (2, 4)]: Input vector of bytes. Possible values range from 0 to 255 in each array index.
                                                      Note:
-                                                        in_byte_arr.size = 2 -> UINT (possible values range from 0 to 65535)
-                                                        in_byte_arr.size = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                        in_byte_arr.size = 2 (UINT)
+                                                        in_byte_arr.size = 4 (UDINT)
                                                         
     Returns:
-        (1) parameter [UINT / UDINT]: Output number.
+        (1) parameter [UINT / UDINT]: A real number greater than or equal to zero.                
     """
         
     try: 
@@ -138,10 +135,10 @@ def Convert_Byte_To_Bit_Array(in_byte):
         Note:
             1 BYTE [0 - 255] = 8 BITs [0 - 1]
     Args:
-        (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
-        
+        (1) in_byte [USINT {Byte}]: A real number greater than or equal to zero. 
+    
     Returns:
-        (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output multiple bits (1 BYTE).
+        (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output vector of bits (1 BYTE).
     """
         
     try: 
@@ -166,10 +163,10 @@ def Convert_Bit_Array_To_BYTE(in_bit_arr):
             8 BITs [0 - 1] = 1 BYTE [0 - 255]
         
     Args:
-        (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input multiple bits (1 BYTE).
+        (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input vector of bits (1 BYTE).
         
     Returns:
-        (1) parameter [USINT {Byte}]: Output number (BYTE -> possible values range from 0 to 255). 
+        (1) parameter [USINT {Byte}]: A real number greater than or equal to zero. 
     """
 
     try: 

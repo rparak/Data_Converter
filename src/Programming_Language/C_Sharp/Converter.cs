@@ -39,10 +39,10 @@ namespace DataConverter
         A byte is a unit of storage in a computer which contains 8-bits and can store 256 different values: 0 to 255. 
 
     Note 2:
-        BOOL (Bit)  : Boolean               [0, 1]          | 1-bit
-        USINT (Byte): Unsigned char         [0, 255]        | 8-bit 
-        UINT        : Unsigned INT          [0, 65535]      | 16-bit
-        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit
+		BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+        USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+        UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+        UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
 
     Note 3:
         Bitwise Operators:
@@ -71,19 +71,17 @@ namespace DataConverter
                 Conversion of input value (T <data_type>) into a vector of values (BYTES).
 
             Args:
-                (1) in_num [T <data_type>]: Input number.
+                (1) in_num [T <data_type>]: A real number greater than or equal to zero.
                 (2) out_size [USINT {Byte}]: The size of the output byte array.
-
-                                                Identification number: 
+                                             Identification number: 
                                                 out_size = 2 (BYTEs OUT)
                                                 out_size = 4 (BYTEs OUT)
 
             Returns:
-                (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index.
-                                            
+                (1) parameter [USINT {Byte} Array]: Vector of values (BYTES). Possible values range from 0 to 255 in each array index. 
                                                     Note:
-                                                        parameter.Length = 2 -> UINT (possible values range from 0 to 65535)
-                                                        parameter.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+                                                        parameter.Length = 2 (UINT)
+                                                        parameter.Length = 4 (UDINT)
              */
 
             dynamic in_num_dynamic = in_num;
@@ -104,14 +102,13 @@ namespace DataConverter
                 Conversion of a vector of values (BYTES) to a value (T <data_type>).
 
             Args:
-                (1) in_byte_arr [USINT {Byte} Array]: Input multiple numbers. Possible values range from 0 to 255 in each array index.
-                                                
-                                                Note:
-                                                    in_byte_arr.Length = 2 -> UINT (possible values range from 0 to 65535)
-                                                    in_byte_arr.Length = 4 -> UDINT (possible values range from 0 to 4294967295)
+                (1) in_byte_arr [USINT {Byte} Array]: Input vector of bytes.
+                                                      Note:
+                                                        in_byte_arr.Length = 2 (UINT)
+                                                        in_byte_arr.Length = 4 (UDINT)
 
             Returns:
-                (1) parameter [T <data_type>]: Output number.
+                (1) parameter [T <data_type>]: A real number greater than or equal to zero.
              */
 
             dynamic out_num_dynamic = (T)Convert.ChangeType(CONST_BYTE_ZERO | in_byte_arr[0] << CONST_BYTE_ZERO, typeof(T));
@@ -136,10 +133,10 @@ namespace DataConverter
                     1 BYTE [0 - 255] = 8 BITs [0 - 1]
 
             Args:
-                (1) in_byte [USINT {Byte}]: Input number (BYTE -> possible values range from 0 to 255). 
+                (1) in_byte [USINT {Byte}]: A real number greater than or equal to zero. 
 
             Returns:
-                (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output multiple bits (1 BYTE).
+                (1) parameter [BOOL {Bit} Array (0 .. 7)]: Output vector of bits (1 BYTE).
              */
 
             bool[] out_bit_arr = new bool[CONST_BYTE_EIGHT];
@@ -161,10 +158,10 @@ namespace DataConverter
                     8 BITs [0 - 1] = 1 BYTE [0 - 255]
 
             Args:
-                (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input multiple bits (1 BYTE). 
+                (1) in_bit_arr [BOOL {Bit} Array (0 .. 7)]: Input vector of bits (1 BYTE). 
 
             Returns:
-                (1) parameter [USINT {Byte}]: Output number (BYTE -> possible values range from 0 to 255).
+                (1) parameter [USINT {Byte}]: A real number greater than or equal to zero.
              */
 
             byte out_byte = 0;
