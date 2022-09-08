@@ -75,7 +75,48 @@ The application (libraries) was primarily tested on company hardware (B&R Automa
 
 ## Test:
 
-**Bézier curve (Quadratic) 2D & 3D:**
+**Description:**
+Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
+
+**ABB_Robotics_RAPID:**
+```bash 
+    VAR dnum IN_UINT_t1 := 12345;
+    VAR dnum OUT_BYTE_t1{2};
+    
+    Convert_UINT_To_USINT_Array IN_UINT_t1, OUT_BYTE_t1;
+```
+
+**BaR_Automation_ANSI_C:**
+```bash 
+    _LOCAL struct Convert_UINT_To_USINT_Array C_UINT_To_USINT_Arr_1;
+    
+    C_UINT_To_USINT_Arr_1.INPUT = 12345;
+    Convert_UINT_To_USINT_Array(&C_UINT_To_USINT_Arr_1);
+```
+
+**C++:**
+```bash 
+   ushort input_var_1 = 12345;
+   std::vector<uint8_t> res_tId_1 = Converter::Number_To_Byte_Array<ushort>(input_var_1, 2);
+```
+
+**C:**
+```bash 
+   unsigned int input_var_1 = 12345;
+   unsigned char* res_tId_1 = Convert_Number_To_Byte_Array(input_var_1, 2);
+```
+
+**C#:**
+```bash 
+    ushort input_var_1 = 12345;
+    byte[] res_tId_1 = Convert.NumberToByteArray<ushort>(input_var_1);
+```
+
+**Python:**
+```bash 
+    input_var = 12345
+    res_tId_2 = Converter.Convert_Number_To_Byte_Array(input_var, 2)
+```
 
 ## Contact Info:
 Roman.Parak@outlook.com
