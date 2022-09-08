@@ -13,42 +13,64 @@ C, ANSI C, C++, C# ABB RAPID, Python
 More information can be found in the individual scripts (.h, .hpp, .py, etc.)
 ```
 
+**Supported on the following operating systems:**
+```bash
+Windows, Linux
+```
+
+## Project Description:
+Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as byte to an array of bits, and an array of bits to byte.
+
+This library can be useful for understanding data conversion using multiple programming languages (C, ANSI C, C++, C# ABB RAPID, Python). It can also be used for industrial communication via PROFINET, EtherNet/IP, etc. industrial ethernet protocols.
+
+The application (libraries) was primarily tested on company hardware (B&R Automation, SMC Industrial Automation, ABB and Universal robots). Industrial communication between B&R Automation PLCs and robots (Universal Robots, ABB) was tested via PROFINET and between B&R Automation devices and SMCs via Ethernet/IP.
+
+**Data Types:**
+```bash 
+    BOOL (Bit)  : Boolean               [0, 1]          | 1-bit  | 0-Byte |
+    USINT (Byte): Unsigned char         [0, 255]        | 8-bit  | 1-Byte |
+    UINT        : Unsigned INT          [0, 65535]      | 16-bit | 2-Byte |
+    UDINT       : Unsigned (double) INT [0, 4294967295] | 32-bit | 4-Byte |
+```
+
+**Bitwise Operators:**
+```bash 
+    &	Bitwise AND
+    |	Bitwise OR
+    <<	Shift left
+    >>	Shift right
+```
 ## Project Hierarchy:
 
 **Repositary [/Data_Converter/]:**
 ```bash
-[  ] /Helpers/
+[ Test the functions for calculating mapping variables (addresses) for industrial ethernet protocols such as PROFINET, EtherNet/IP. ] /Helpers/
 
 /src/Programming_Language/ABB_Robotics_RAPID/
-[ Text .. ] /Lib_Converter.sys/
-[ Text .. ] /Module1.mod/
+[ Main lib. for data conversion. ] /Lib_Converter.sys/
+[ Simple tests to verify the functionality of individual functions. ] /Module1.mod/
 
 /src/Programming_Language/BaR_Automation_ANSI_C/
-[ Text .. ] /Type_1/Converter.h/
-[ Text .. ] /Type_1/Main.c/
-[ Text .. ] /Type_1/Converter.h/
-[ Text .. ] /Type_1/Main.c/
+[ Main lib. for data conversion (T1). ] /Type_1/Converter.h/
+[ Simple tests to verify the functionality of individual functions. ] /Type_1/Main.c/
+[ Main lib. for data conversion (T2). ] /Type_1/Converter.h/
+[ Simple tests to verify the functionality of individual functions. ] /Type_1/Main.c/
 
 /src/Programming_Language/C++/
-[ Text .. ] /Converter.hpp/
-[ Text .. ] /main.cpp/
+[ Main lib. for data conversion. ] /Converter.hpp/
+[ Simple tests to verify the functionality of individual functions. ] /main.cpp/
 
 /src/Programming_Language/C/
-[ Text .. ] /Converter.h/
-[ Text .. ] /main.c/
+[ Main lib. for data conversion. ] /Converter.h/
+[ Simple tests to verify the functionality of individual functions. ] /main.c/
 
 /src/Programming_Language/C_Sharp/
-[ Text .. ] /Converter.cs/
-[ Text .. ] /Program.cs/
+[ Main lib. for data conversion. ] /Converter.cs/
+[ Simple tests to verify the functionality of individual functions. ] /Program.cs/
 
 /src/Programming_Language/Python/
-[ Text .. ] /Converter.py/
-[ Text .. ] /main.py/
-
-C++17
-[ Main Class (2D, 3D Bézier curves) ] /src/CPP/Bezier.h
-[ Test Program                      ] /src/CPP/Bezier.h
-[ Simple utility functions          ] /src/CPP/Utils.h 
+[ Main lib. for data conversion. ] /Converter.py/
+[ Simple tests to verify the functionality of individual functions. ] /main.py/
 ```
 
 ## Test:
