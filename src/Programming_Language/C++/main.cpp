@@ -20,7 +20,7 @@ SOFTWARE.
 Author   : Roman Parak
 Email    : Roman.Parak @outlook.com
 Github   : https://github.com/rparak
-File Name: Converter.h
+File Name: main.cpp
 ****************************************************************************/
 
 // Custom Lib.:
