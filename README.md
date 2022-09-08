@@ -55,10 +55,10 @@ Description:
 /src/Programming_Language/ABB_Robotics_RAPID/
 Description:
     Main lib. for data conversion. 
-/Lib_Converter.sys/
+- /Lib_Converter.sys/
 Description:
     Simple tests to verify the functionality of individual functions.
-/Module1.mod/
+- /Module1.mod/
 
 /src/Programming_Language/BaR_Automation_ANSI_C/
 Description:
