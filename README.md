@@ -21,7 +21,7 @@ Windows, Linux
 ## Project Description:
 Library to converts base data types to an array of bytes, and an array of bytes to base data types as well as byte to an array of bits, and an array of bits to byte.
 
-This library can be useful for understanding data conversion using multiple programming languages (C, ANSI C, C++, C# ABB RAPID, Python). It can also be used for industrial communication via PROFINET, EtherNet/IP, etc. industrial ethernet protocols.
+This library can be useful for understanding data conversion using multiple programming languages (C, ANSI C, C++, C#, ABB RAPID, Python). It can also be used for industrial communication via PROFINET, EtherNet/IP, etc. industrial ethernet protocols.
 
 The application (libraries) was primarily tested on company hardware (B&R Automation, SMC Industrial Automation, ABB and Universal robots). Industrial communication between B&R Automation PLCs and robots (Universal Robots, ABB) was tested via PROFINET and between B&R Automation devices and SMCs via Ethernet/IP.
 
