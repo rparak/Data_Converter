@@ -116,7 +116,7 @@ def VM_Read(limit):
 def main():
     """
     Description:
-        Test the functions for calculating mapping variables (addresses) for Ethernet protocols 
+        Test the functions for calculating mapping variables (addresses) for industrial ethernet protocols 
         such as PROFINET, EtherNet/IP. 
     """
 
