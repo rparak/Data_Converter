@@ -30,9 +30,9 @@ namespace Converter{
     Description:
         Initialization of constants.
     */
-    const uint8_t CONST_BYTE_ONE = 0x01;
+    const uint8_t CONST_HEX_ONE = 0x01;
     // Number of bits in byte: 1 BYTE = 8 BIT
-    const uint8_t CONST_BYTE_EIGHT = 0x08;
+    const uint8_t CONST_HEX_EIGHT = 0x08;
     const uint8_t CONST_BYTE_MAX_VALUE = 0xff;
 
     template <typename T> std::vector<uint8_t> Number_To_Byte_Array(T in_num, uint8_t out_size)
@@ -57,7 +57,7 @@ namespace Converter{
 
         std::vector<uint8_t> out_num_arr;
         for(uint8_t i = 0; i < out_size; ++i){
-            out_num_arr.push_back((in_num >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE);
+            out_num_arr.push_back((in_num >> i * CONST_HEX_EIGHT) & CONST_BYTE_MAX_VALUE);
         }
 
         return out_num_arr;
@@ -81,7 +81,7 @@ namespace Converter{
 
         T out_num = 0;
         for (auto const& in_byte_arr_i : in_byte_arr | boost::adaptors::indexed(0)){
-            out_num |= in_byte_arr_i.value() << in_byte_arr_i.index() * CONST_BYTE_EIGHT;
+            out_num |= in_byte_arr_i.value() << in_byte_arr_i.index() * CONST_HEX_EIGHT;
         }
 
         return out_num;
@@ -105,7 +105,7 @@ namespace Converter{
 
         std::vector<bool> out_bit_arr;
         for(uint8_t i = 0; i < 8; ++i){
-            out_bit_arr.push_back((in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE);
+            out_bit_arr.push_back((in_byte >> i * CONST_HEX_ONE) & CONST_HEX_ONE);
         }
     
         return out_bit_arr;
@@ -128,7 +128,7 @@ namespace Converter{
 
         uint8_t out_byte = 0;
         for (auto const& in_bit_arr_i : in_bit_array | boost::adaptors::indexed(0)){
-            out_byte |= in_bit_arr_i.value() << in_bit_arr_i.index() * CONST_BYTE_ONE;
+            out_byte |= in_bit_arr_i.value() << in_bit_arr_i.index() * CONST_HEX_ONE;
         }
 
         return out_byte;

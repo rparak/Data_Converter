@@ -54,9 +54,9 @@ Note 3:
 Description:
     Initialization of constants.
 */
-const unsigned char CONST_BYTE_ONE = 0x01;
+const unsigned char CONST_HEX_ONE = 0x01;
 // Number of bits in byte: 1 BYTE = 8 BIT
-const unsigned char CONST_BYTE_EIGHT = 0x08;
+const unsigned char CONST_HEX_EIGHT = 0x08;
 const unsigned char CONST_BYTE_MAX_VALUE = 0xff;
 // Macro (Utilities).
 #define Arr_Length(x) (sizeof(x) / sizeof((x)[0]))
@@ -83,7 +83,7 @@ unsigned char* Convert_Number_To_Byte_Array(unsigned int in_num, unsigned char o
    
     static unsigned char* out_num_arr = (unsigned char*)malloc(sizeof(unsigned char) * out_size);
     for(unsigned char i = 0; i < out_size; ++i){
-        out_num_arr[i] = (in_num >> i * CONST_BYTE_EIGHT) & CONST_BYTE_MAX_VALUE;
+        out_num_arr[i] = (in_num >> i * CONST_HEX_EIGHT) & CONST_BYTE_MAX_VALUE;
     }
 
     return out_num_arr;
@@ -107,7 +107,7 @@ unsigned int Convert_Byte_Array_To_Number(unsigned char* in_byte_arr)
 
     unsigned int out_num = 0;
     for (unsigned char i = 0; i < Arr_Length(in_byte_arr); ++i){
-        out_num |= in_byte_arr[i] << i * CONST_BYTE_EIGHT;
+        out_num |= in_byte_arr[i] << i * CONST_HEX_EIGHT;
     }
 
     return out_num;
@@ -127,9 +127,9 @@ bool* Convert_Byte_To_Bit_Array(unsigned short in_byte){
         (1) parameter [BOOL {Bit} Array (0 .. 7)]: Vector of bits (1 BYTE).
      */
 
-    static bool out_bit_arr[CONST_BYTE_EIGHT];
+    static bool out_bit_arr[CONST_HEX_EIGHT];
     for(unsigned char i = 0; i < Arr_Length(out_bit_arr); ++i){
-        out_bit_arr[i] = (in_byte >> i * CONST_BYTE_ONE) & CONST_BYTE_ONE;
+        out_bit_arr[i] = (in_byte >> i * CONST_HEX_ONE) & CONST_HEX_ONE;
     }
  
     return out_bit_arr;
@@ -152,7 +152,7 @@ unsigned short Convert_Bit_Array_To_Byte(bool* in_bit_array){
 
     unsigned short out_byte = 0;
     for (unsigned char i = 0; i < Arr_Length(in_bit_array); ++i){
-        out_byte |= in_bit_array[i] << i * CONST_BYTE_ONE;
+        out_byte |= in_bit_array[i] << i * CONST_HEX_ONE;
     }
 
     return out_byte;
