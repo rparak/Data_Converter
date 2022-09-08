@@ -44,33 +44,63 @@ The application (libraries) was primarily tested on company hardware (B&R Automa
 
 **Repositary [/Data_Converter/]:**
 ```bash
-[ Test the functions for calculating mapping variables (addresses) for industrial ethernet protocols such as PROFINET, EtherNet/IP. ] /Helpers/
+
+Description:
+    Test the functions for calculating mapping variables (addresses) for industrial ethernet 
+    protocols such as PROFINET, EtherNet/IP.
+
+/Helpers/var_map_calculator.py
+
 
 /src/Programming_Language/ABB_Robotics_RAPID/
-[ Main lib. for data conversion. ] /Lib_Converter.sys/
-[ Simple tests to verify the functionality of individual functions. ] /Module1.mod/
+Description:
+    Main lib. for data conversion. 
+/Lib_Converter.sys/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/Module1.mod/
 
 /src/Programming_Language/BaR_Automation_ANSI_C/
-[ Main lib. for data conversion (T1). ] /Type_1/Converter.h/
-[ Simple tests to verify the functionality of individual functions. ] /Type_1/Main.c/
-[ Main lib. for data conversion (T2). ] /Type_1/Converter.h/
-[ Simple tests to verify the functionality of individual functions. ] /Type_1/Main.c/
+Description:
+    Main lib. for data conversion (T1/2). 
+/Type_1/Converter.h/
+/Type_2/Converter.h/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/Type_1/Main.c/
+/Type_2/Main.c/
 
 /src/Programming_Language/C++/
-[ Main lib. for data conversion. ] /Converter.hpp/
-[ Simple tests to verify the functionality of individual functions. ] /main.cpp/
+Description:
+    Main lib. for data conversion.
+/Converter.hpp/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/main.cpp/
 
 /src/Programming_Language/C/
-[ Main lib. for data conversion. ] /Converter.h/
-[ Simple tests to verify the functionality of individual functions. ] /main.c/
+Description:
+    Main lib. for data conversion.
+/Converter.h/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/main.c/
 
 /src/Programming_Language/C_Sharp/
-[ Main lib. for data conversion. ] /Converter.cs/
-[ Simple tests to verify the functionality of individual functions. ] /Program.cs/
+Description:
+    Main lib. for data conversion.
+/Converter.cs/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/Program.cs/
 
 /src/Programming_Language/Python/
-[ Main lib. for data conversion. ] /Converter.py/
-[ Simple tests to verify the functionality of individual functions. ] /main.py/
+Description:
+    Main lib. for data conversion.
+/Converter.py/
+Description:
+    Simple tests to verify the functionality of individual functions.
+/main.py/
 ```
 
 ## Test:
