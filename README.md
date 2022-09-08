@@ -45,61 +45,22 @@ The application (libraries) was primarily tested on company hardware (B&R Automa
 **Repositary [/Data_Converter/]:**
 ```bash
 
-**Description:**
+[/Helpers/var_map_calculator.py]
+Description:
     Test the functions for calculating mapping variables (addresses) for industrial ethernet 
     protocols such as PROFINET, EtherNet/IP.
 
-/Helpers/var_map_calculator.py
+Language = C, ANSI C, C++, C# ABB RAPID, Python;
 
-/src/Programming_Language/ABB_Robotics_RAPID/
-Description:
-    Main lib. for data conversion. 
-- /Lib_Converter.sys/
-Description:
-    Simple tests to verify the functionality of individual functions.
-- /Module1.mod/
-
-/src/Programming_Language/BaR_Automation_ANSI_C/
-Description:
-    Main lib. for data conversion (T1/2). 
-/Type_1/Converter.h/
-/Type_2/Converter.h/
-Description:
-    Simple tests to verify the functionality of individual functions.
-/Type_1/Main.c/
-/Type_2/Main.c/
-
-/src/Programming_Language/C++/
+[/src/Programming_Language/{Language}/Converter.*]
+* = .sys, .h, .hpp, .cs, .py
 Description:
     Main lib. for data conversion.
-/Converter.hpp/
+    
+[/src/Programming_Language/{Language}/main.*] 
+* = .mod, .h, .hpp, .cs, .py
 Description:
     Simple tests to verify the functionality of individual functions.
-/main.cpp/
-
-/src/Programming_Language/C/
-Description:
-    Main lib. for data conversion.
-/Converter.h/
-Description:
-    Simple tests to verify the functionality of individual functions.
-/main.c/
-
-/src/Programming_Language/C_Sharp/
-Description:
-    Main lib. for data conversion.
-/Converter.cs/
-Description:
-    Simple tests to verify the functionality of individual functions.
-/Program.cs/
-
-/src/Programming_Language/Python/
-Description:
-    Main lib. for data conversion.
-/Converter.py/
-Description:
-    Simple tests to verify the functionality of individual functions.
-/main.py/
 ```
 
 ## Test:
