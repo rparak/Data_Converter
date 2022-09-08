@@ -27,7 +27,7 @@ File Name: Program.cs
 using System;
 // Custom Script:
 //  Base conversion between data. 
-using Convert = DataConverter.Core;
+using Converter = DataConverter.Core;
 
 namespace ConsoleApp1
 {
@@ -45,7 +45,7 @@ namespace ConsoleApp1
             ushort input_var_1 = 12345;
 
             // Converting uint (16-bit -> 2-byte) to multiple bytes.
-            byte[] res_tId_1 = Convert.NumberToByteArray<ushort>(input_var_1);
+            byte[] res_tId_1 = Converter.NumberToByteArray<ushort>(input_var_1);
 
             // Display the results.
             //string[] result_t1 = Array.ConvertAll(res_tId_1, x => x.ToString());
@@ -53,7 +53,7 @@ namespace ConsoleApp1
 
             // Check result:
             // Converting multiple bytes to an uint (16-bit -> 2-byte).
-            ushort check_res_tId_1 = Convert.ByteArrayToNumber<ushort>(res_tId_1);
+            ushort check_res_tId_1 = Converter.ByteArrayToNumber<ushort>(res_tId_1);
 
             // Compare results.
             Console.WriteLine("[INFO] Test No. 1: UINT <-> BYTE[]");
@@ -70,11 +70,11 @@ namespace ConsoleApp1
             uint input_var_2 = 12345678;
 
             // Converting udint (32-bit -> 4-byte) to multiple bytes.
-            byte[] res_tId_2 = Convert.NumberToByteArray<uint>(input_var_2);
+            byte[] res_tId_2 = Converter.NumberToByteArray<uint>(input_var_2);
 
             // Check result:
             // Converting multiple bytes to an udint (32-bit -> 4-byte).
-            uint check_res_tId_2 = Convert.ByteArrayToNumber<uint>(res_tId_2);
+            uint check_res_tId_2 = Converter.ByteArrayToNumber<uint>(res_tId_2);
 
             // Compare results.
             Console.WriteLine("[INFO] Test No. 2: UDINT <-> BYTE[]");
@@ -92,11 +92,11 @@ namespace ConsoleApp1
             byte input_var_3 = 123;
 
             // Converting byte (0 - 255) to multiple bits.
-            bool[] res_tId_3 = Convert.ByteToBitArray(input_var_3);
+            bool[] res_tId_3 = Converter.ByteToBitArray(input_var_3);
 
             // Check result:
             // Converting multiple bits to byte (0 - 255).
-            byte check_res_tId_3 = Convert.BitArrayToByte(res_tId_3);
+            byte check_res_tId_3 = Converter.BitArrayToByte(res_tId_3);
 
             // Compare results.
             Console.WriteLine("[INFO] Test No. 3: BYTE <-> BIT[]");
