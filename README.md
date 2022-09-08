@@ -99,7 +99,7 @@ Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
 **C#:**
 ```bash 
     ushort input_var_1 = 12345;
-    byte[] res_tId_1 = Convert.NumberToByteArray<ushort>(input_var_1);
+    byte[] res_tId_1 = Converter.NumberToByteArray<ushort>(input_var_1);
 ```
 
 **Python:**
