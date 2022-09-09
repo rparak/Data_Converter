@@ -63,7 +63,7 @@ Description:
     Simple tests to verify the functionality of individual functions.
 ```
 
-## Test:
+## Demonstration:
 
 **Description:**
 Conversion of input value (UINT/UDINT) into a vector of values (BYTES).
