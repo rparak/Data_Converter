@@ -122,3 +122,6 @@ Roman.Parak@outlook.com
   howpublished = {\url{https://https://github.com/rparak/Data_Converter}}
 }
 ```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
